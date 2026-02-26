@@ -95,6 +95,7 @@ async function callGemini(payload) {
 // 属性中文名/英文名 → 角色卡 attributes 键（STR/CON/INT 等）
 const ATTR_NAME_TO_KEY = {
   力量: "STR", 体质: "CON", 体型: "SIZ", 敏捷: "DEX", 外貌: "APP", 智力: "INT", 意志: "POW", 教育: "EDU",
+  灵感: "INT",  // CoC 7 版灵感检定 = 智力
   STR: "STR", CON: "CON", SIZ: "SIZ", DEX: "DEX", APP: "APP", INT: "INT", POW: "POW", EDU: "EDU",
 };
 // 技能名别名：AI 可能用不同用词，统一到角色卡里的技能名
