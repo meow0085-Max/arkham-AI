@@ -940,7 +940,9 @@
       const ARKHAM_API_BASE =
         typeof window !== "undefined" && window.ARKHAM_API_BASE != null
           ? window.ARKHAM_API_BASE
-          : "http://localhost:3000";
+          : (typeof window !== "undefined" && window.location && window.location.origin && !/^https?:\/\/localhost(:\d+)?$/i.test(window.location.origin)
+              ? window.location.origin
+              : "http://localhost:3000");
 
       function getClientId() {
         let id = localStorage.getItem("arkham_ai_client_id");

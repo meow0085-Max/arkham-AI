@@ -1,0 +1,11 @@
+{
+  "name": "arkhum-ai",
+  "version": "1.0.0",
+  "description": "Arkham AI 档案馆 — Vercel 部署用根目录",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1"
+  }
+}
