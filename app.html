@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arkham AI 档案馆</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arkham AI 档案馆</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background-color: #0b0b0d;
+      }
+      .font-archive {
+        font-family: "Special Elite", "Times New Roman", ui-serif, Georgia,
+          serif;
+      }
+    
+      .view { display: block; }
+      .view.hidden { display: none !important; }
+      
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top, #0b0c10 0, #020617 55%);
+      }
+      .font-archive {
+        font-family: "Special Elite", "Times New Roman", ui-serif, Georgia,
+          serif;
+      }
+      .paper {
+        background-color: #f3f1eb;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.04) 1px,
+            transparent 1px
+          ),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        background-size: 26px 26px;
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    
+      
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top, #020617 0, #000000 55%);
+      }
+      .font-archive {
+        font-family: "Special Elite", "Times New Roman", ui-serif, Georgia,
+          serif;
+      }
+      .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: rgba(30, 64, 175, 0.5);
+        border-radius: 9999px;
+      }
+    
+    </style>
+  
+  </head>
+  <body class="min-h-screen text-slate-100">
+    <div class="min-h-screen flex flex-col">
+      <header class="border-b border-slate-900/80 bg-black/80 backdrop-blur">
+        <div class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+          <div class="flex items-center gap-3">
+            <div class="h-9 w-9 rounded-full border border-red-900/80 bg-red-950/60 flex items-center justify-center text-xs font-semibold tracking-[0.24em] text-red-100">MU</div>
+            <div class="leading-tight">
+              <div class="text-xs sm:text-sm font-semibold tracking-[0.35em] uppercase text-slate-100">ARKHAM ARCHIVES</div>
+              <div class="text-[10px] tracking-[0.28em] uppercase text-red-700/90">OFFICIAL ACCESS ONLY</div>
+            </div>
+          </div>
+          <nav class="flex items-center gap-4 text-sm">
+            <button type="button" onclick="showView('home')" class="nav-link nav-home text-red-500 font-medium tracking-[0.16em] text-[11px] uppercase">首页</button>
+            <button type="button" onclick="showView('investigator')" class="nav-link nav-investigator text-slate-300 hover:text-slate-50 transition-colors tracking-[0.16em] text-[11px] uppercase">建立调查员</button>
+            <button type="button" onclick="showView('keeper')" class="nav-link nav-keeper text-slate-300 hover:text-slate-50 transition-colors tracking-[0.16em] text-[11px] uppercase">跑团大厅</button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="flex-1">
+        <div id="view-home" class="view">
+        <section class="max-w-5xl mx-auto px-4 pt-16 pb-10">
+          <!-- Hero -->
+          <div class="text-center mb-10">
+            <h1
+              class="font-archive text-3xl sm:text-4xl md:text-[40px] text-slate-50 mb-4 tracking-wide"
+            >
+              你想开启哪段冒险？
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm mb-6">
+              AI 守秘人已就绪，档案室永不熄灯，所有异常事件都将被妥善记录……
+            </p>
+
+            <!-- 中央搜索条 -->
+            <div
+              class="max-w-2xl mx-auto bg-[#151518] border border-slate-800/80 rounded-full px-4 py-2.5 shadow-[0_18px_45px_rgba(0,0,0,0.85)]"
+            >
+              <form id="search-form" class="flex items-center gap-3">
+                <input
+                  id="search-input"
+                  type="text"
+                  autocomplete="off"
+                  placeholder="搜索跑团记录 / 模组标题 / 调查员档案……"
+                  class="flex-1 bg-transparent outline-none border-none text-xs sm:text-sm text-slate-100 placeholder:text-slate-500"
+                />
+                <button
+                  type="submit"
+                  class="inline-flex items-center gap-1.5 rounded-full border border-slate-700/80 bg-slate-900/90 hover:bg-slate-800 px-3 py-1.5 text-[11px] text-slate-100 transition-colors"
+                >
+                  <span>搜索</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Process 卡片 -->
+          <section
+            class="grid gap-4 md:grid-cols-2 mb-10 text-xs text-slate-200"
+          >
+            <button
+              type="button"
+              onclick="showView('investigator')"
+              class="rounded-2xl bg-[#17171b] border border-slate-800/90 px-4 py-4 text-left shadow-[0_18px_45px_rgba(0,0,0,0.85)] hover:border-red-600/80 hover:bg-[#1e1e23] transition-colors"
+            >
+              <div class="text-[11px] text-red-500 tracking-[0.18em] mb-1.5">
+                PROCESS A
+              </div>
+              <div class="text-base font-semibold mb-1">建立角色卡</div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                根据 COC7 规则生成或自定义调查员属性、背景与职业，让 Excel
+                时代自动化卡牌制作，专注于你的故事与角色。
+              </p>
+            </button>
+
+            <button
+              type="button"
+              onclick="showView('keeper')"
+              class="rounded-2xl bg-[#17171b] border border-slate-800/90 px-4 py-4 text-left shadow-[0_18px_45px_rgba(0,0,0,0.85)] hover:border-red-600/80 hover:bg-[#1e1e23] transition-colors"
+            >
+              <div class="text-[11px] text-red-500 tracking-[0.18em] mb-1.5">
+                PROCESS B
+              </div>
+              <div class="text-base font-semibold mb-1">进入跑团大厅</div>
+              <p class="text-[11px] text-slate-400 leading-relaxed">
+                带上你的调查员与模组文本，进入 AI KP
+                的引导视角，一步步完成你的第一场或第无数场克苏鲁探索。
+              </p>
+            </button>
+          </section>
+
+          <!-- 搜索结果区域 -->
+          <section
+            class="border border-slate-900/80 rounded-2xl bg-[#08080a] px-4 py-4 sm:px-6 sm:py-5"
+          >
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-sm font-medium text-slate-100">
+                跑团记录 / 模组档案
+                <span
+                  id="result-count"
+                  class="ml-1 text-[11px] text-slate-500 align-middle"
+                  >（使用上方搜索栏开始检索示例档案）</span
+                >
+              </h3>
+              <button
+                type="button"
+                id="reset-search"
+                class="hidden text-[11px] text-slate-400 hover:text-slate-200"
+              >
+                清除筛选
+              </button>
+            </div>
+            <div
+              id="results-container"
+              class="space-y-2 max-h-[260px] overflow-y-auto pr-1"
+            ></div>
+          </section>
+        </section>
+
+        <footer class="border-t border-slate-900/80 bg-black/60">
+          <div
+            class="max-w-5xl mx-auto px-4 py-3 text-[11px] text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2"
+          >
+            <span>Arkham AI · COC 7th 新人向 AI 跑团实验项目</span>
+            <span class="text-slate-600">
+              Phase 2: 属性自定义 &amp; 对话逻辑接入
+            </span>
+          </div>
+        </footer>
+      </div>
+        <div id="view-investigator" class="view hidden">
+        <section class="max-w-5xl mx-auto px-4 py-6 md:py-10">
+          <div class="mb-4 md:mb-6 flex flex-col gap-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <h1
+                  class="font-archive text-2xl md:text-3xl text-slate-50 mb-1"
+                >
+                  调查员档案 · 卷宗
+                </h1>
+                <p class="text-xs md:text-sm text-slate-400">
+                  按 COC 7th 规则 Roll 属性，或为特定模组精细捏人。所有属性的
+                  1/2 与 1/5 将实时派生计算。
+                </p>
+              </div>
+              <div
+                class="hidden md:flex flex-col items-end text-[11px] text-slate-500"
+              >
+                <span>Arkham AI · Investigator Creator</span>
+                <span>Local-Only · 数据仅存储在本地浏览器</span>
+              </div>
+            </div>
+            <div
+              class="flex flex-wrap items-center gap-3 text-[11px] text-slate-400"
+            >
+              <span id="top-occ-remaining">职业点：--</span>
+              <span id="top-interest-remaining">兴趣点剩余：--</span>
+            </div>
+          </div>
+
+          <div
+            class="paper rounded-2xl border border-slate-900/80 px-4 py-4 md:px-6 md:py-6 relative overflow-hidden text-slate-900"
+          >
+            <div class="relative space-y-5 text-xs">
+              <!-- 上半部分：身份 + 属性 + 技能 -->
+              <section
+                class="grid gap-5 md:grid-cols-[minmax(0,1.8fr)_minmax(0,1.7fr)]"
+              >
+                <!-- 左侧：身份 + 属性 -->
+                <div class="space-y-4">
+                  <!-- 身份识读 -->
+                  <div>
+                    <div
+                      class="inline-flex items-center px-3 py-1.5 bg-slate-900 text-slate-50 text-[11px] tracking-[0.18em] uppercase"
+                    >
+                      身份识读 / IDENTITY
+                    </div>
+                    <div
+                      class="border border-slate-500/70 border-t-0 bg-[#f7f5ef]/80 px-4 py-3 space-y-2"
+                    >
+                      <div
+                        class="grid grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)_minmax(0,1fr)] gap-3"
+                      >
+                        <label class="space-y-1">
+                          <span class="text-[11px]"
+                            >姓名 NAME</span
+                          >
+                          <input
+                            id="name"
+                            type="text"
+                            class="w-full border-b border-slate-500/70 bg-transparent px-1 py-1 text-xs focus:outline-none focus:border-red-800"
+                            placeholder="例如：爱德华·皮尔斯"
+                          />
+                        </label>
+                        <label class="space-y-1">
+                          <span class="text-[11px]">年龄 AGE</span>
+                          <input
+                            id="age"
+                            type="number"
+                            min="10"
+                            max="99"
+                            class="w-full border-b border-slate-500/70 bg-transparent px-1 py-1 text-xs focus:outline-none focus:border-red-800"
+                            placeholder="34"
+                          />
+                        </label>
+                        <label class="space-y-1">
+                          <span class="text-[11px]">性别 GENDER</span>
+                          <select
+                            id="gender"
+                            class="w-full border-b border-slate-500/70 bg-transparent px-1 py-1 text-xs focus:outline-none focus:border-red-800"
+                          >
+                            <option value=""></option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                            <option value="其他">其他</option>
+                          </select>
+                        </label>
+                      </div>
+                      <label class="space-y-1 block">
+                        <span class="text-[11px]"
+                          >居住地 RES.</span
+                        >
+                        <input
+                          id="residence"
+                          type="text"
+                          class="w-full border-b border-slate-500/70 bg-transparent px-1 py-1 text-xs focus:outline-none focus:border-red-800"
+                          placeholder="例如：波士顿，马萨诸塞州"
+                        />
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- 属性区 -->
+                  <div>
+                    <div
+                      class="inline-flex items-center px-3 py-1.5 bg-slate-900 text-slate-50 text-[11px] tracking-[0.18em] uppercase"
+                    >
+                      生理/心理参数 / ATTRIBUTES
+                    </div>
+                    <div
+                      class="border border-slate-500/70 border-t-0 bg-[#f7f5ef]/80 px-3 py-3 space-y-2"
+                    >
+                      <div
+                        class="flex items-center justify-between text-[10px] text-slate-600"
+                      >
+                        <span
+                          >STR / CON / DEX / APP / POW 使用 3D6×5，SIZ / INT / EDU
+                          使用 (2D6+6)×5。</span
+                        >
+                        <button
+                          type="button"
+                          id="roll-attributes"
+                          class="inline-flex items-center gap-1 rounded border border-slate-600/80 bg-slate-900 text-slate-100 px-2.5 py-1 text-[10px] hover:bg-slate-800 active:translate-y-px"
+                        >
+                          随机属性
+                        </button>
+                      </div>
+                      <div
+                        id="attribute-grid"
+                        class="grid grid-cols-3 gap-2 sm:gap-3 text-center"
+                      >
+                        <!-- 由 JS 注入属性卡片 -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- HP / SAN / MP + DB/Build + MOV -->
+                  <div class="space-y-2 text-center text-xs text-slate-800">
+                    <div class="grid grid-cols-3 gap-3">
+                      <div
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                      >
+                        <div class="text-[11px] tracking-[0.16em] uppercase">
+                          HP
+                        </div>
+                        <div
+                          id="hp-display"
+                          class="text-xl font-semibold text-slate-900"
+                        >
+                          0
+                        </div>
+                      </div>
+                      <div
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                      >
+                        <div class="text-[11px] tracking-[0.16em] uppercase">
+                          SAN
+                        </div>
+                        <div
+                          id="san-display"
+                          class="text-xl font-semibold text-slate-900"
+                        >
+                          0
+                        </div>
+                      </div>
+                      <div
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                      >
+                        <div class="text-[11px] tracking-[0.16em] uppercase">
+                          MP
+                        </div>
+                        <div
+                          id="mp-display"
+                          class="text-xl font-semibold text-slate-900"
+                        >
+                          0
+                        </div>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                      <div
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 text-left"
+                      >
+                        <div class="text-[11px] tracking-[0.14em] uppercase">
+                          DB / BUILD
+                        </div>
+                        <div class="flex items-baseline gap-3 mt-1">
+                          <span
+                            id="db-display"
+                            class="text-base font-semibold text-slate-900"
+                            >0</span
+                          >
+                          <span class="text-[11px] text-slate-700">
+                            体格
+                            <span
+                              id="build-display"
+                              class="font-semibold text-slate-900"
+                              >0</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+                      <div
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                      >
+                        <div class="text-[11px] tracking-[0.16em] uppercase">
+                          MOV
+                        </div>
+                        <div
+                          id="mov-display"
+                          class="text-xl font-semibold text-slate-900"
+                        >
+                          0
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 右侧：技能 + 背景 -->
+                <div class="space-y-4">
+                  <div>
+                    <div class="inline-flex items-center px-3 py-1.5 bg-slate-900 text-slate-50 text-[11px] tracking-[0.18em] uppercase mb-1.5">
+                      专业技能评估 / SKILLS
+                    </div>
+                    <div class="border border-slate-500/70 border-t-0 bg-[#f7f5ef]/80 px-3 py-3 space-y-2">
+                      <div class="flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-700">
+                        <span id="balance-occ">剩余职业点：<strong>--</strong> / 总额 --</span>
+                        <span id="balance-interest">剩余兴趣点：<strong>--</strong> / 总额 --</span>
+                      </div>
+                      <label class="space-y-1 block">
+                        <span class="text-[11px]">当前指定职业 OCCUPATION</span>
+                        <select id="occupation" class="w-full border-b border-slate-500/70 bg-transparent px-1 py-1 text-xs focus:outline-none focus:border-red-800">
+                          <option value=""></option>
+                          <option value="会计师">会计师</option>
+                          <option value="杂技演员">杂技演员</option>
+                          <option value="私家侦探">私家侦探</option>
+                          <option value="劳工">劳工</option>
+                          <option value="律师">律师</option>
+                          <option value="医生">医生</option>
+                          <option value="警察">警察</option>
+                          <option value="神职人员">神职人员</option>
+                          <option value="自定义">自定义</option>
+                        </select>
+                      </label>
+                      <div class="grid grid-cols-[minmax(5rem,1fr)_1.5rem_1.5rem_1.5rem_1.75rem_1.25rem_1.25rem] gap-x-1 text-[10px] text-slate-500 border-b border-slate-400/60 pb-0.5 mb-1">
+                        <span>技能</span>
+                        <span class="text-right">基础</span>
+                        <span class="text-right">职</span>
+                        <span class="text-right">兴</span>
+                        <span class="text-right">总值</span>
+                        <span class="text-right">半值</span>
+                        <span class="text-right">五分</span>
+                      </div>
+                      <div id="skills-container" class="max-h-[380px] overflow-y-auto space-y-3 text-[11px] pr-1">
+                        <!-- 由 JS 按 category 分组注入 -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 背景 -->
+                  <div>
+                    <div
+                      class="inline-flex items-center px-3 py-1.5 bg-slate-900 text-slate-50 text-[11px] tracking-[0.18em] uppercase"
+                    >
+                      背景审查报告 / BACKGROUND
+                    </div>
+                    <div
+                      class="border border-slate-500/70 border-t-0 bg-[#f7f5ef]/80 px-3 py-3 space-y-2 text-xs text-slate-800"
+                    >
+                      <textarea
+                        id="background"
+                        rows="5"
+                        class="w-full bg-white/60 border border-slate-400/70 px-2 py-1.5 text-xs leading-relaxed focus:outline-none focus:border-red-800"
+                        placeholder="FIELD REPORT: 记录调查员的成长经历、重要案件、信念、羁绊与秘密。这些信息会注入 AI 守秘人的 System Prompt 中，影响开场描写与线索呈现方式。"
+                      ></textarea>
+                      <div
+                        class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-600"
+                      >
+                        <span>
+                          核查签署 / APPROVED BY：
+                          <input
+                            id="approvedBy"
+                            type="text"
+                            class="border-b border-slate-500/70 bg-transparent px-1 py-0.5 text-xs focus:outline-none focus:border-red-800"
+                            placeholder="Agent Henderson"
+                          />
+                        </span>
+                        <span>
+                          地点与日期：
+                          <input
+                            id="recordPlace"
+                            type="text"
+                            class="border-b border-slate-500/70 bg-transparent px-1 py-0.5 text-xs focus:outline-none focus:border-red-800"
+                            placeholder="阿卡姆，马萨诸塞州；OCT 15, 1926"
+                          />
+                        </span>
+                      </div>
+                      <p class="text-[10px] text-slate-500">
+                        提示：背景字段及签署信息会被作为“卷宗页脚”一并注入 AI
+                        守秘人，以增强沉浸感。
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- 操作区 -->
+              <section
+                class="flex flex-col md:flex-row md:items-center justify-between gap-3 pt-3 border-t border-slate-400/70 mt-1"
+              >
+                <div class="text-[11px] text-slate-700">
+                  当前档案将以
+                  <span class="font-semibold text-red-900"
+                    >本地浏览器 LocalStorage</span
+                  >
+                  形式保存，不会上传至服务器。
+                </div>
+                <div class="flex items-center gap-2 justify-end flex-wrap">
+                  <button
+                    type="button"
+                    id="reset-form"
+                    class="text-[11px] px-2.5 py-1 rounded border border-slate-500/70 text-slate-700 bg-slate-100 hover:bg-slate-200"
+                  >
+                    清空并重来
+                  </button>
+                  <button
+                    type="button"
+                    id="save-investigator"
+                    class="text-[11px] px-3 py-1.5 rounded bg-red-900 text-red-50 border border-red-950/80 shadow-sm hover:bg-red-800 active:translate-y-px"
+                  >
+                    保存调查员档案
+                  </button>
+                  <button
+                    type="button"
+                    id="save-and-go-keeper"
+                    class="text-[11px] px-3 py-1.5 rounded bg-indigo-700 text-indigo-50 border border-indigo-900/80 shadow-sm hover:bg-indigo-600 active:translate-y-px"
+                  >
+                    保存并进入跑团大厅
+                  </button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </div>
+        <div id="view-keeper" class="view hidden">
+        <section class="max-w-6xl mx-auto px-4 py-4 md:py-6">
+          <div class="grid gap-4 lg:grid-cols-[minmax(0,2.1fr)_minmax(0,1.3fr)]">
+            <!-- 对话区域 -->
+            <div
+              class="relative rounded-2xl border border-slate-800/80 bg-gradient-to-b from-slate-950/90 to-black/80 shadow-[0_20px_60px_rgba(0,0,0,0.9)]"
+            >
+              <div
+                class="absolute inset-x-6 top-3 flex items-center justify-between text-[11px] text-slate-500"
+              >
+                <span
+                  >AI 守秘人频道 ·
+                  <span class="text-slate-300">机密级</span></span
+                >
+                <span class="flex items-center gap-1">
+                  <span
+                    class="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"
+                  ></span>
+                  正在监听你的行动
+                </span>
+              </div>
+
+              <div class="pt-8 pb-3 px-3 sm:px-4">
+                <div
+                  id="chat-log"
+                  class="h-[360px] sm:h-[420px] lg:h-[430px] overflow-y-auto scrollbar-thin space-y-3 pr-2"
+                >
+                  <!-- 首次载入时插入欢迎消息 -->
+                </div>
+
+                <div class="border-t border-slate-800/80 pt-2 mt-2">
+                  <div
+                    id="typing-indicator"
+                    class="hidden text-[11px] text-slate-500 mb-1.5"
+                  >
+                    守秘人正在翻阅档案与骰子结果…
+                  </div>
+
+                  <form id="chat-form" class="flex items-end gap-2">
+                    <textarea
+                      id="chat-input"
+                      rows="1"
+                      placeholder="描述你的行动、对话或检定请求，例如：“我想在图书馆检索关于邪教的记录，使用图书馆利用检定。”"
+                      class="flex-1 resize-none rounded-xl border border-slate-700/80 bg-black/70 px-3 py-2 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                    ></textarea>
+                    <button
+                      type="submit"
+                      class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-indigo-600 hover:bg-indigo-500 text-slate-50 text-xs border border-indigo-400/80 shadow-md active:translate-y-px"
+                    >
+                      ▶
+                    </button>
+                  </form>
+                  <div class="mt-1.5 text-[10px] text-slate-500">
+                    回车发送，Shift + Enter 换行。当前为本地模拟回复，后续可替换为
+                    Gemini / 其他模型 API。
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 右侧：调查员与模组 -->
+            <aside class="space-y-4">
+              <section
+                class="rounded-2xl border border-slate-800/80 bg-slate-950/80 px-3 py-3 sm:px-4 sm:py-4"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <h2
+                      class="font-archive text-base text-slate-50 flex items-center gap-1.5"
+                    >
+                      调查员档案
+                      <span
+                        class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] border border-slate-600/80 text-slate-300"
+                        >Sync from Creator</span
+                      >
+                    </h2>
+                    <p class="text-[11px] text-slate-500">
+                      来自“角色卡建立”页面的最新档案，将作为 System Prompt 注入对话。
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    id="refresh-investigator"
+                    class="text-[11px] px-2 py-1 rounded border border-slate-600/80 text-slate-200 hover:bg-slate-900"
+                  >
+                    重新载入
+                  </button>
+                </div>
+                <div
+                  id="investigator-panel"
+                  class="rounded-xl border border-slate-800/80 bg-gradient-to-b from-slate-900/60 to-slate-950/80 px-3 py-2.5 text-xs text-slate-200"
+                >
+                  <p class="text-[11px] text-slate-400">
+                    尚未找到本地调查员档案。请先前往
+                    <button
+                      type="button"
+                      onclick="showView('investigator')"
+                      class="underline underline-offset-2 text-slate-200"
+                    >
+                      角色卡建立
+                    </button>
+                    页面创建并保存角色。
+                  </p>
+                </div>
+              </section>
+
+              <section
+                class="rounded-2xl border border-slate-800/80 bg-slate-950/80 px-3 py-3 sm:px-4 sm:py-4"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <div>
+                    <h2
+                      class="font-archive text-base text-slate-50 flex items-center gap-1.5"
+                    >
+                      模组卷宗
+                    </h2>
+                    <p class="text-[11px] text-slate-500">
+                      上传官方模组 / 自制模组的文本文件，AI 会将其视为剧本骨架。
+                    </p>
+                  </div>
+                </div>
+                <div class="space-y-2 text-xs text-slate-200">
+                  <label
+                    class="flex items-center justify-between gap-2 rounded-xl border border-slate-700/80 bg-black/60 px-3 py-2 cursor-pointer hover:border-indigo-500/80"
+                  >
+                    <div class="flex flex-col gap-0.5">
+                      <span class="text-[11px] text-slate-300"
+                        >选择模组文件 (.txt / .md)</span
+                      >
+                      <span
+                        id="module-filename"
+                        class="text-[11px] text-slate-500"
+                        >尚未选择文件</span
+                      >
+                    </div>
+                    <span
+                      class="inline-flex items-center justify-center rounded-full border border-slate-600/80 bg-slate-900 px-2 py-0.5 text-[11px]"
+                    >
+                      浏览…
+                    </span>
+                    <input
+                      id="module-file"
+                      type="file"
+                      accept=".txt,.md,.json,.pdf"
+                      class="hidden"
+                    />
+                  </label>
+                  <div
+                    id="module-preview"
+                    class="h-28 rounded-xl border border-slate-800/80 bg-black/60 px-3 py-2 text-[11px] text-slate-400 overflow-y-auto scrollbar-thin"
+                  >
+                    模组前几行内容将显示在此处，供你确认是否选择正确。完整文本会作为“模组设定”注入给
+                    AI。
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="rounded-2xl border border-slate-800/80 bg-slate-950/80 px-3 py-3 sm:px-4 sm:py-4 text-[11px] text-slate-400 space-y-1.5"
+              >
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-slate-200 font-medium">后端连接</span>
+                  <span id="keeper-backend-status" class="text-[10px] text-slate-500">检测中…</span>
+                </div>
+                <p class="text-[11px] text-slate-500 mb-2">
+                  守秘人对话与 PDF 模组解析由后端调用 Gemini 完成。请先启动后端（运行
+                  <code class="text-[10px] px-1 rounded bg-slate-900/80">server/启动后端.bat</code>），并在服务端配置环境变量
+                  <code class="text-[10px] px-1 rounded bg-slate-900/80">GEMINI_API_KEY</code>。
+                </p>
+                <p class="text-[10px] text-slate-500">
+                  获取 Key（免费）：<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="text-indigo-400 underline">Google AI Studio → Get API key</a>
+                </p>
+              </section>
+            </aside>
+          </div>
+        </section>
+      </div>
+      </main>
+    </div>
+    <div
+      id="toast"
+      class="fixed inset-x-0 bottom-3 flex justify-center pointer-events-none"
+      style="display: none"
+    >
+      <div
+        class="pointer-events-auto inline-flex items-center gap-2 rounded-full bg-black/80 border border-emerald-500/60 px-3 py-1.5 text-[11px] text-emerald-100 shadow-lg"
+      >
+        <span
+          class="inline-flex h-4 w-4 items-center justify-center rounded-full border border-emerald-400/70"
+          >✓</span
+        >
+        <span id="toast-text">已保存至本地浏览器。</span>
+      </div>
+    </div>
+
+    <script>
+      var KEEPER_STORAGE_KEY = 'arkham_investigator_data';
+      function renderKeeperPanel(inv) {
+        var panel = document.getElementById('investigator-panel');
+        if (!panel) return;
+        if (!inv || typeof inv !== 'object') {
+          panel.innerHTML = '<p class="text-[11px] text-slate-400">尚未找到调查员档案。请先前往 <button type="button" onclick="showView(\'investigator\')" class="underline underline-offset-2 text-slate-200">角色卡建立</button> 页面创建并保存角色。</p>';
+          return;
+        }
+        var attrs = inv.attributes || {};
+        function v(a) { return a && a.value !== undefined ? a.value : 0; }
+        function fmt(k) { var a = attrs[k]; return a ? (a.value + ' (' + (a.half||0) + '/' + (a.fifth||0) + ')') : '-'; }
+        var con = Number(v(attrs.CON)) || 0, siz = Number(v(attrs.SIZ)) || 0, pow = Number(v(attrs.POW)) || 0;
+        var hp = Math.floor((con + siz) / 10), san = pow, dex = (attrs.DEX && attrs.DEX.value !== undefined) ? attrs.DEX.value : '-';
+        var age = inv.age !== undefined ? inv.age : '', gender = inv.gender || '', bg = inv.background || '（尚未填写背景，将使用更为中性的开场白。）';
+        panel.innerHTML = '<div class="flex items-start justify-between gap-2"><div><div class="flex items-center gap-2 mb-0.5">' +
+          '<span class="text-sm font-semibold text-slate-50">' + (inv.name || '未命名调查员') + '</span>' +
+          (inv.occupation ? '<span class="px-1.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-600/80 text-[10px] text-slate-200">' + inv.occupation + '</span>' : '') +
+          '</div><div class="text-[11px] text-slate-300 mt-1 flex items-center gap-3">' +
+          '<span>HP <span class="text-slate-50 font-medium">' + hp + '</span></span><span>SAN <span class="text-slate-50 font-medium">' + san + '</span></span><span>DEX <span class="text-slate-50 font-medium">' + dex + '</span></span>' +
+          '</div><div class="text-[11px] text-slate-400 mb-1 mt-0.5">' + (age ? '年龄：<span class="text-slate-200">' + age + '</span> ' : '') + (gender ? '/ 性别：<span class="text-slate-200">' + gender + '</span>' : '') + '</div></div></div>' +
+          '<div class="grid grid-cols-3 gap-1.5 mt-1.5 text-[11px]">' +
+          '<div>STR：<span class="text-slate-50">' + fmt('STR') + '</span></div><div>CON：<span class="text-slate-50">' + fmt('CON') + '</span></div><div>DEX：<span class="text-slate-50">' + fmt('DEX') + '</span></div>' +
+          '<div>APP：<span class="text-slate-50">' + fmt('APP') + '</span></div><div>POW：<span class="text-slate-50">' + fmt('POW') + '</span></div><div>SIZ：<span class="text-slate-50">' + fmt('SIZ') + '</span></div>' +
+          '<div>INT：<span class="text-slate-50">' + fmt('INT') + '</span></div><div>EDU：<span class="text-slate-50">' + fmt('EDU') + '</span></div><div>LUCK：<span class="text-slate-50">' + fmt('LCK') + '</span></div>' +
+          '</div><div class="mt-2.5 border-t border-slate-800/80 pt-1.5"><div class="text-[11px] text-slate-400 mb-1">背景摘要：</div><p class="text-[11px] text-slate-300 max-h-20 overflow-y-auto scrollbar-thin">' + bg + '</p></div>';
+      }
+      function showView(name) {
+        document.querySelectorAll('.view').forEach(function(el) { el.classList.add('hidden'); });
+        var el = document.getElementById('view-' + name);
+        if (el) el.classList.remove('hidden');
+        document.querySelectorAll('.nav-link').forEach(function(l) { l.classList.remove('text-red-500', 'font-medium'); l.classList.add('text-slate-300'); });
+        var nav = document.querySelector('.nav-' + name);
+        if (nav) { nav.classList.add('text-red-500', 'font-medium'); nav.classList.remove('text-slate-300'); }
+        location.hash = name;
+        if (name === 'keeper') {
+          var inv = null;
+          if (window.__pendingKeeperInvestigator) {
+            inv = window.__pendingKeeperInvestigator;
+            window.__pendingKeeperInvestigator = null;
+          } else {
+            try {
+              var raw = localStorage.getItem(KEEPER_STORAGE_KEY);
+              if (raw) inv = JSON.parse(raw);
+            } catch (e) {}
+          }
+          window.__keeperCurrentInvestigator = inv || null;
+          renderKeeperPanel(inv);
+        }
+      }
+      (function() {
+        var hash = (location.hash || '#home').slice(1);
+        if (['home','investigator','keeper'].indexOf(hash) >= 0) showView(hash);
+        else showView('home');
+      })();
+    </script>
+    <script>
+      const mockRecords = [
+        {
+          id: 1,
+          type: "session",
+          title: "阿卡姆公共图书馆 · 深夜馆藏调查",
+          kp: "AI-KP: Arkham-β",
+          investigator: "伊莱恩·摩根 (新闻记者)",
+          tags: ["模组", "阿卡姆", "图书馆", "新手跑"],
+          date: "1923-11-07",
+          summary:
+            "一次看似普通的资料查阅，最终牵扯出阿卡姆镇上接连发生的失踪案。适合 1-2 名新手调查员体验。",
+        },
+        {
+          id: 2,
+          type: "module",
+          title: "旧城区的钟声",
+          kp: "AI-KP: Arkham-α",
+          investigator: "任意",
+          tags: ["模组", "城市探索", "短篇"],
+          date: "1924-02-03",
+          summary:
+            "围绕阿卡姆旧城区每逢午夜敲响的第十三声钟声展开的短篇模组，可作为新手上手向。",
+        },
+        {
+          id: 3,
+          type: "investigator",
+          title: "西奥多·克拉克",
+          kp: "-",
+          investigator: "历史系讲师",
+          tags: ["调查员", "学者", "高 EDU"],
+          date: "1922-09-12",
+          summary:
+            "米斯卡托尼克大学历史系青年讲师，擅长图书馆利用与历史学，对学院旧档案室有深入了解。",
+        },
+      ];
+
+      const typeLabelMap = {
+        session: "跑团实况",
+        module: "模组",
+        investigator: "调查员档案",
+      };
+
+      const resultsContainer = document.getElementById("results-container");
+      const resultCount = document.getElementById("result-count");
+      const resetSearchBtn = document.getElementById("reset-search");
+      const searchForm = document.getElementById("search-form");
+      const searchInput = document.getElementById("search-input");
+
+      function renderResults(list, keyword) {
+        resultsContainer.innerHTML = "";
+
+        if (!list.length) {
+          resultsContainer.innerHTML =
+            '<p class="text-xs text-slate-500">未找到匹配的档案，可以尝试更换关键字，或稍后接入真实跑团记录存档系统。</p>';
+          resultCount.textContent = keyword
+            ? `（与“${keyword}”相关的结果：0 条）`
+            : "（暂无数据）";
+          resetSearchBtn.classList.add("hidden");
+          return;
+        }
+
+        for (const item of list) {
+          const card = document.createElement("article");
+          card.className =
+            "rounded-xl border border-slate-800/80 bg-slate-950/70 px-3 py-2.5 text-xs hover:border-slate-500/80 transition-colors";
+
+          const tagLabel = typeLabelMap[item.type] || "档案";
+
+          card.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <div class="flex items-center gap-2">
+                <span class="text-slate-100 font-medium">${item.title}</span>
+                <span class="px-1.5 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-[10px] text-slate-300">${tagLabel}</span>
+              </div>
+              <span class="text-[10px] text-slate-500">${item.date}</span>
+            </div>
+            <p class="text-[11px] text-slate-400 mb-1.5">${item.summary}</p>
+            <div class="flex flex-wrap items-center gap-2 text-[10px] text-slate-500">
+              <span>KP：${item.kp}</span>
+              <span class="text-slate-700">|</span>
+              <span>调查员：${item.investigator}</span>
+              <span class="flex-1"></span>
+              ${
+                item.tags && item.tags.length
+                  ? item.tags
+                      .map(
+                        (t) =>
+                          `<span class="px-1.5 py-0.5 rounded bg-slate-900/80 border border-slate-700/70 text-slate-300">${t}</span>`
+                      )
+                      .join("")
+                  : ""
+              }
+            </div>
+          `;
+
+          resultsContainer.appendChild(card);
+        }
+
+        resultCount.textContent = keyword
+          ? `（与“${keyword}”相关的结果：${list.length} 条 · 当前为示例数据）`
+          : `（示例档案：${list.length} 条）`;
+        resetSearchBtn.classList.toggle("hidden", !keyword);
+      }
+
+      renderResults(mockRecords, "");
+
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const keyword = searchInput.value.trim();
+        if (!keyword) {
+          renderResults(mockRecords, "");
+          return;
+        }
+        const lower = keyword.toLowerCase();
+        const filtered = mockRecords.filter((r) => {
+          const text =
+            `${r.title} ${r.summary} ${r.kp} ${r.investigator} ${
+              (r.tags || []).join(" ") || ""
+            }`.toLowerCase();
+          return text.includes(lower);
+        });
+        renderResults(filtered, keyword);
+      });
+
+      resetSearchBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        renderResults(mockRecords, "");
+      });
+    </script>
+    <script>const STORAGE_KEY = "arkham_investigator_data";
+      const ARKHAM_API_BASE =
+        typeof window !== "undefined" && window.ARKHAM_API_BASE != null
+          ? window.ARKHAM_API_BASE
+          : "http://localhost:3000";
+
+      function getClientId() {
+        let id = localStorage.getItem("arkham_ai_client_id");
+        if (!id) {
+          id =
+            typeof crypto !== "undefined" && crypto.randomUUID
+              ? crypto.randomUUID()
+              : "id-" + Date.now() + "-" + Math.random().toString(36).slice(2, 11);
+          localStorage.setItem("arkham_ai_client_id", id);
+        }
+        return id;
+      }
+
+      // COC 七版 Excel 核心公式实现：来自 COCCalculator 类
+      class COCCalculator {
+        // 1. 基础转换逻辑：返回常规/困难/极难
+        static getLevels(val) {
+          const value = parseInt(val) || 0;
+          return {
+            normal: value,
+            hard: Math.floor(value / 2),
+            extreme: Math.floor(value / 5),
+          };
+        }
+
+        // 2. 派生属性
+        static calculateHP(con, siz) {
+          return Math.floor((parseInt(con) + parseInt(siz)) / 10);
+        }
+
+        static calculateMP(pow) {
+          return Math.floor(parseInt(pow) / 5);
+        }
+
+        static calculateInitialSan(pow) {
+          return parseInt(pow) || 0;
+        }
+
+        // 3. 战斗属性：伤害加值 DB 与体格 Build（按 STR+SIZ 分段）
+        static calculateDBAndBuild(str, siz) {
+          const sum = parseInt(str) + parseInt(siz);
+
+          if (sum >= 2 && sum <= 64) return { db: "-2", build: -2 };
+          if (sum >= 65 && sum <= 84) return { db: "-1", build: -1 };
+          if (sum >= 85 && sum <= 124) return { db: "0", build: 0 };
+          if (sum >= 125 && sum <= 164) return { db: "+1D4", build: 1 };
+          if (sum >= 165 && sum <= 204) return { db: "+1D6", build: 2 };
+
+          // 超过 204 后，每 80 点增加 1D6 伤害和 1 点体格
+          const extra = Math.floor((sum - 204 + 79) / 80);
+          return {
+            db: `+${extra + 1}D6`,
+            build: 2 + extra,
+          };
+        }
+
+        // 4. 移动力 MOV：比较 STR/DEX/SIZ，再叠加年龄减值
+        static calculateMOV(str, dex, siz, age) {
+          str = parseInt(str);
+          dex = parseInt(dex);
+          siz = parseInt(siz);
+          age = parseInt(age);
+
+          let baseMov = 8;
+          if (dex < siz && str < siz) {
+            baseMov = 7;
+          } else if (dex > siz && str > siz) {
+            baseMov = 9;
+          } else {
+            baseMov = 8;
+          }
+
+          if (age >= 40) baseMov -= 1;
+          if (age >= 50) baseMov -= 1;
+          if (age >= 60) baseMov -= 1;
+          if (age >= 70) baseMov -= 1;
+          if (age >= 80) baseMov -= 1;
+
+          return Math.max(1, baseMov);
+        }
+
+        // 5. 职业点/兴趣点（保留以便扩展）
+        static calculateProfessionalPoints(stats, type) {
+          const edu = parseInt(stats.edu) || 0;
+          switch (type) {
+            case "EDU*4":
+              return edu * 4;
+            case "EDU*2+STR*2":
+              return edu * 2 + (parseInt(stats.str) || 0) * 2;
+            case "EDU*2+DEX*2":
+              return edu * 2 + (parseInt(stats.dex) || 0) * 2;
+            case "EDU*2+APP*2":
+              return edu * 2 + (parseInt(stats.app) || 0) * 2;
+            default:
+              return edu * 4;
+          }
+        }
+
+        static calculateInterestPoints(intVal) {
+          return (parseInt(intVal) || 0) * 2;
+        }
+      }
+
+      const AttrKeys = ["STR", "CON", "DEX", "APP", "POW", "SIZ", "INT", "EDU"];
+
+      const ATTR_CONFIG = [
+        {
+          key: "STR",
+          label: "力量 STR",
+          formula: "3D6 × 5",
+          rollType: "3d6x5",
+          note: "体能与徒手搏斗能力。",
+        },
+        {
+          key: "CON",
+          label: "体质 CON",
+          formula: "3D6 × 5",
+          rollType: "3d6x5",
+          note: "耐力、健康状况与抗毒性。",
+        },
+        {
+          key: "DEX",
+          label: "敏捷 DEX",
+          formula: "3D6 × 5",
+          rollType: "3d6x5",
+          note: "反应速度与灵巧程度。",
+        },
+        {
+          key: "APP",
+          label: "外貌 APP",
+          formula: "3D6 × 5",
+          rollType: "3d6x5",
+          note: "外在形象与亲和力。",
+        },
+        {
+          key: "POW",
+          label: "意志 POW",
+          formula: "3D6 × 5",
+          rollType: "3d6x5",
+          note: "精神力与抵抗疯狂的能力。",
+        },
+        {
+          key: "SIZ",
+          label: "体型 SIZ",
+          formula: "(2D6 + 6) × 5",
+          rollType: "2d6plus6x5",
+          note: "身材与体格大小。",
+        },
+        {
+          key: "INT",
+          label: "智力 INT",
+          formula: "(2D6 + 6) × 5",
+          rollType: "2d6plus6x5",
+          note: "理解能力与推理能力。",
+        },
+        {
+          key: "EDU",
+          label: "教育 EDU",
+          formula: "(2D6 + 6) × 5",
+          rollType: "2d6plus6x5",
+          note: "受教育程度与知识储备。",
+        },
+        {
+          key: "LCK",
+          label: "幸运 LUCK",
+          formula: "3D6 × 5",
+          rollType: "3d6x5",
+          note: "运气好坏，常用于关键检定。",
+        },
+      ];
+
+      const CATEGORY_ORDER = ["学问", "调查", "交涉", "支援", "特技", "战斗", "资产"];
+      const SkillDatabase = [
+        { name: "会计", base: 5, category: "学问" },
+        { name: "物理", base: 1, category: "学问" },
+        { name: "人类学", base: 1, category: "学问" },
+        { name: "估价", base: 5, category: "特技" },
+        { name: "考古学", base: 1, category: "学问" },
+        { name: "艺术与手艺", base: 5, category: "特技" },
+        { name: "魅力", base: 15, category: "交涉" },
+        { name: "攀爬", base: 20, category: "支援" },
+        { name: "计算机使用", base: 1, category: "特技" },
+        { name: "信用评级", base: 0, category: "资产" },
+        { name: "克苏鲁神话", base: 0, category: "学问" },
+        { name: "乔装", base: 5, category: "特技" },
+        { name: "汽车驾驶", base: 20, category: "支援" },
+        { name: "电气维修", base: 10, category: "特技" },
+        { name: "电子学", base: 1, category: "特技" },
+        { name: "急救", base: 30, category: "支援" },
+        { name: "历史", base: 5, category: "学问" },
+        { name: "恐吓", base: 15, category: "交涉" },
+        { name: "跳跃", base: 20, category: "支援" },
+        { name: "法律", base: 5, category: "学问" },
+        { name: "图书馆使用", base: 20, category: "调查" },
+        { name: "聆听", base: 20, category: "调查" },
+        { name: "锁匠", base: 1, category: "特技" },
+        { name: "机械维修", base: 10, category: "特技" },
+        { name: "医学", base: 1, category: "学问" },
+        { name: "博物学", base: 10, category: "学问" },
+        { name: "导航", base: 10, category: "支援" },
+        { name: "神秘学", base: 5, category: "学问" },
+        { name: "重型机械操作", base: 1, category: "特技" },
+        { name: "其他语言", base: 1, category: "学问" },
+        { name: "母语", base: 0, category: "学问", useEdu: true },
+        { name: "说服", base: 10, category: "交涉" },
+        { name: "药学", base: 1, category: "学问" },
+        { name: "摄影", base: 5, category: "特技" },
+        { name: "心理学", base: 10, category: "调查" },
+        { name: "精神分析", base: 1, category: "支援" },
+        { name: "骑乘", base: 5, category: "支援" },
+        { name: "科学", base: 1, category: "学问" },
+        { name: "侦查", base: 25, category: "调查" },
+        { name: "潜行", base: 20, category: "特技" },
+        { name: "游泳", base: 20, category: "支援" },
+        { name: "话术", base: 5, category: "交涉" },
+        { name: "投掷", base: 20, category: "战斗" },
+        { name: "追踪", base: 10, category: "调查" },
+        { name: "斗殴", base: 25, category: "战斗" },
+        { name: "闪避", base: 0, category: "战斗", useDexHalf: true },
+        { name: "手枪", base: 20, category: "战斗" },
+        { name: "步枪/霰弹枪", base: 25, category: "战斗" },
+        { name: "弓箭", base: 15, category: "战斗" },
+        { name: "鞭子", base: 5, category: "战斗" },
+      ];
+
+      // --- 职业数据库与职业点逻辑：来自 职业录入.txt ---
+      const OccupationDatabase = {
+        会计师: {
+          cr: { min: 30, max: 70 },
+          formula: (s) => s.edu * 4,
+          formulaText: "EDU × 4",
+          skills: [
+            "会计",
+            "法律",
+            "图书馆使用",
+            "聆听",
+            "说服",
+            "侦查",
+            "任意其他两项个人或时代特长",
+          ],
+        },
+        杂技演员: {
+          cr: { min: 9, max: 20 },
+          formula: (s) => s.edu * 2 + s.dex * 2,
+          formulaText: "EDU × 2 + DEX × 2",
+          skills: [
+            "攀爬",
+            "闪避",
+            "跳跃",
+            "投掷",
+            "艺术与手艺",
+            "其他语言",
+            "任意两项个人或时代特长",
+          ],
+        },
+        私家侦探: {
+          cr: { min: 9, max: 40 },
+          formula: (s) => s.edu * 2 + Math.max(s.dex, s.app) * 2,
+          formulaText: "EDU × 2 + (DEX或APP) × 2",
+          skills: [
+            "会计",
+            "法律",
+            "图书馆使用",
+            "聆听",
+            "锁匠",
+            "心理学",
+            "侦查",
+            "任意其他个人或时代特长",
+          ],
+        },
+        劳工: {
+          cr: { min: 0, max: 10 },
+          formula: (s) => s.edu * 2 + s.str * 2,
+          formulaText: "EDU × 2 + STR × 2",
+          skills: [
+            "估价",
+            "闪避",
+            "急救",
+            "机械维修",
+            "重型机械操作",
+            "任意一项其他个人或时代特长",
+          ],
+        },
+        律师: {
+          cr: { min: 20, max: 80 },
+          formula: (s) => s.edu * 4,
+          formulaText: "EDU × 4",
+          skills: [
+            "会计",
+            "法律",
+            "图书馆使用",
+            "心理学",
+            "说服",
+            "任意两项其他个人或时代特长",
+          ],
+        },
+        医生: {
+          cr: { min: 30, max: 80 },
+          formula: (s) => s.edu * 4,
+          formulaText: "EDU × 4",
+          skills: [
+            "医学",
+            "其他语言(拉丁语)",
+            "图书馆使用",
+            "生物学",
+            "心理学",
+            "任意三项科学或时代特长",
+          ],
+        },
+        警察: {
+          cr: { min: 9, max: 30 },
+          formula: (s) => s.edu * 2 + Math.max(s.str, s.dex) * 2,
+          formulaText: "EDU × 2 + (STR或DEX) × 2",
+          skills: [
+            "斗殴",
+            "枪械",
+            "法律",
+            "心理学",
+            "侦查",
+            "社交技能",
+            "汽车驾驶",
+            "任意一项其他时代特长",
+          ],
+        },
+        神职人员: {
+          cr: { min: 9, max: 60 },
+          formula: (s) => s.edu * 4,
+          formulaText: "EDU × 4",
+          skills: [
+            "历史",
+            "图书馆使用",
+            "聆听",
+            "其他语言",
+            "母语",
+            "心理学",
+            "说服",
+            "任意一项其他时代特长",
+          ],
+        },
+      };
+
+      function getOccupationPoints(occupationName, stats) {
+        const occ = OccupationDatabase[occupationName];
+        if (!occ) return stats.edu * 4;
+        return occ.formula(stats);
+      }
+
+      function checkCRRange(occupationName, crValue) {
+        const occ = OccupationDatabase[occupationName];
+        if (!occ) return { valid: true };
+        const isValid = crValue >= occ.cr.min && crValue <= occ.cr.max;
+        return {
+          valid: isValid,
+          min: occ.cr.min,
+          max: occ.cr.max,
+          message: isValid
+            ? ""
+            : `信用评级应在 ${occ.cr.min}-${occ.cr.max} 之间`,
+        };
+      }
+
+      function roll3d6x5() {
+        let sum = 0;
+        for (let i = 0; i < 3; i++) {
+          sum += 1 + Math.floor(Math.random() * 6);
+        }
+        return sum * 5;
+      }
+
+      function roll2d6plus6x5() {
+        let sum = 0;
+        for (let i = 0; i < 2; i++) {
+          sum += 1 + Math.floor(Math.random() * 6);
+        }
+        return (sum + 6) * 5;
+      }
+
+      function clampAttribute(value) {
+        if (Number.isNaN(value)) return 0;
+        if (value < 0) return 0;
+        if (value > 99) return 99;
+        return value;
+      }
+
+      function getAttrValue(key) {
+        const input = document.querySelector(
+          `[data-attr-input="${key}"]`
+        );
+        return clampAttribute(Number(input?.value || 0));
+      }
+
+      function updateSecondaryStats() {
+        const str = getAttrValue("STR");
+        const con = getAttrValue("CON");
+        const dex = getAttrValue("DEX");
+        const siz = getAttrValue("SIZ");
+        const pow = getAttrValue("POW");
+
+        const ageInput = document.getElementById("age");
+        const ageVal = ageInput ? Number(ageInput.value || 0) : 0;
+
+        const hp = COCCalculator.calculateHP(con, siz);
+        const san = COCCalculator.calculateInitialSan(pow);
+        const mp = COCCalculator.calculateMP(pow);
+        const { db, build } = COCCalculator.calculateDBAndBuild(str, siz);
+        const mov = COCCalculator.calculateMOV(str, dex, siz, ageVal);
+
+        const hpEl = document.getElementById("hp-display");
+        const sanEl = document.getElementById("san-display");
+        const mpEl = document.getElementById("mp-display");
+        if (hpEl) hpEl.textContent = hp;
+        if (sanEl) sanEl.textContent = san;
+        if (mpEl) mpEl.textContent = mp;
+        const dbEl = document.getElementById("db-display");
+        const buildEl = document.getElementById("build-display");
+        const movEl = document.getElementById("mov-display");
+        if (dbEl) dbEl.textContent = db;
+        if (buildEl) buildEl.textContent = build;
+        if (movEl) movEl.textContent = mov;
+      }
+
+      function showToast(message) {
+        const toast = document.getElementById("toast");
+        const text = document.getElementById("toast-text");
+        if (!toast || !text) return;
+        text.textContent = message;
+        toast.style.display = "flex";
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => {
+          toast.style.display = "none";
+        }, 2200);
+      }
+
+      function renderAttributeRows() {
+        const grid = document.getElementById("attribute-grid");
+        if (!grid) return;
+        grid.innerHTML = "";
+
+        for (const attr of ATTR_CONFIG) {
+          const card = document.createElement("div");
+          card.dataset.attrKey = attr.key;
+          card.className =
+            "border border-slate-500/70 bg-white/90 px-2.5 py-2.5 flex flex-col justify-between";
+
+          card.innerHTML = `
+            <div class="text-[10px] text-slate-600 mb-0.5">
+              ${attr.label}
+            </div>
+            <div class="mb-1">
+              <input
+                type="number"
+                min="0"
+                max="99"
+                inputmode="numeric"
+                class="w-full bg-transparent text-center text-xl font-semibold text-slate-900 focus:outline-none border-b border-transparent focus:border-red-800"
+                data-attr-input="${attr.key}"
+                value="0"
+              />
+            </div>
+            <div class="text-[10px] text-slate-500 flex items-center justify-center gap-1.5">
+              <span data-attr-half="${attr.key}">0</span>
+              <span class="text-slate-400">|</span>
+              <span data-attr-fifth="${attr.key}">0</span>
+            </div>
+          `;
+
+          grid.appendChild(card);
+        }
+      }
+
+      function getSkillBase(skill) {
+        if (skill.useDexHalf) return Math.floor(getAttrValue("DEX") / 2);
+        if (skill.useEdu) return getAttrValue("EDU");
+        return Number(skill.base) || 0;
+      }
+      function getSkillBaseLabel(skill) {
+        if (skill.useDexHalf) return "DEX/2";
+        if (skill.useEdu) return "EDU";
+        return String(skill.base ?? 0);
+      }
+      function updateAllSkillDisplays() {
+        for (const skill of SkillDatabase) {
+          const base = getSkillBase(skill);
+          const occInput = document.querySelector(`[data-skill-occ="${CSS.escape(skill.name)}"]`);
+          const intInput = document.querySelector(`[data-skill-int="${CSS.escape(skill.name)}"]`);
+          const occ = Number(occInput?.value || 0) || 0;
+          const interest = Number(intInput?.value || 0) || 0;
+          const total = base + occ + interest;
+          const half = Math.floor(total / 2);
+          const fifth = Math.floor(total / 5);
+          const baseEl = document.querySelector(`[data-skill-base="${CSS.escape(skill.name)}"]`);
+          const totalEl = document.querySelector(`[data-skill-total="${CSS.escape(skill.name)}"]`);
+          const halfEl = document.querySelector(`[data-skill-half="${CSS.escape(skill.name)}"]`);
+          const fifthEl = document.querySelector(`[data-skill-fifth="${CSS.escape(skill.name)}"]`);
+          if (baseEl) baseEl.textContent = base;
+          if (totalEl) totalEl.textContent = total;
+          if (halfEl) halfEl.textContent = half;
+          if (fifthEl) fifthEl.textContent = fifth;
+        }
+      }
+      function renderSkillRows(existingSkills) {
+        const container = document.getElementById("skills-container");
+        if (!container) return;
+        container.innerHTML = "";
+        const byCategory = {};
+        for (const skill of SkillDatabase) {
+          const c = skill.category || "其他";
+          if (!byCategory[c]) byCategory[c] = [];
+          byCategory[c].push(skill);
+        }
+        for (const category of CATEGORY_ORDER) {
+          const skills = byCategory[category];
+          if (!skills || !skills.length) continue;
+          const section = document.createElement("div");
+          section.className = "space-y-1";
+          section.innerHTML = `<div class="text-[10px] font-semibold text-slate-600 uppercase tracking-wider border-b border-slate-400/60 pb-0.5 sticky top-0 bg-[#f7f5ef] z-[1]">${category}</div>`;
+          const list = document.createElement("div");
+          list.className = "space-y-0.5";
+          for (const skill of skills) {
+            const stored = existingSkills?.[skill.name];
+            let occVal = 0, interestVal = 0;
+            if (stored) {
+              occVal = Number(stored.occ) || 0;
+              interestVal = Number(stored.interest) || 0;
+              if (typeof stored.value === "number" && stored.occ === undefined && stored.interest === undefined) {
+                occVal = Math.max(0, Number(stored.value) - getSkillBase(skill));
+              }
+            }
+            const row = document.createElement("div");
+            row.className = "grid grid-cols-[minmax(5rem,1fr)_1.5rem_1.5rem_1.5rem_1.75rem_1.25rem_1.25rem] gap-x-1 items-center py-0.5 border-b border-dashed border-slate-300/50 hover:bg-amber-50/50";
+            row.dataset.skillRow = skill.name;
+            row.dataset.skillName = skill.name;
+            row.setAttribute("role", "button");
+            row.tabIndex = 0;
+            const baseLabel = getSkillBaseLabel(skill);
+            row.innerHTML = `
+              <div class="flex items-center gap-1 min-w-0">
+                <span class="shrink-0 w-6 text-[10px] text-amber-700 font-medium invisible [&[data-visible]]:visible" data-occ-badge=""> </span>
+                <span class="truncate text-slate-800" title="${skill.name}">${skill.name}</span>
+              </div>
+              <span class="text-right text-slate-500" data-skill-base="${skill.name}" title="${baseLabel}">0</span>
+              <input type="number" min="0" max="99" inputmode="numeric" class="w-full text-right bg-transparent text-[11px] border-b border-slate-400/70 focus:outline-none focus:border-red-800" data-skill-occ="${skill.name}" value="${occVal}" title="职业加点" />
+              <input type="number" min="0" max="99" inputmode="numeric" class="w-full text-right bg-transparent text-[11px] border-b border-slate-400/70 focus:outline-none focus:border-red-800" data-skill-int="${skill.name}" value="${interestVal}" title="兴趣加点" />
+              <span class="text-right font-medium text-slate-800" data-skill-total="${skill.name}">0</span>
+              <span class="text-right text-[10px] text-slate-500" data-skill-half="${skill.name}">0</span>
+              <span class="text-right text-[10px] text-slate-500" data-skill-fifth="${skill.name}">0</span>
+            `;
+            list.appendChild(row);
+          }
+          section.appendChild(list);
+          container.appendChild(section);
+        }
+        updateAllSkillDisplays();
+      }
+
+
+      function updateDerived(attrKey, baseValue) {
+        const halfEl = document.querySelector(
+          `[data-attr-half="${attrKey}"]`
+        );
+        const fifthEl = document.querySelector(
+          `[data-attr-fifth="${attrKey}"]`
+        );
+        const value = clampAttribute(Number(baseValue));
+        const levels = COCCalculator.getLevels(value);
+        if (halfEl) halfEl.textContent = levels.hard;
+        if (fifthEl) fifthEl.textContent = levels.extreme;
+        const inputEl = document.querySelector(
+          `[data-attr-input="${attrKey}"]`
+        );
+        if (inputEl && inputEl.value !== String(value)) {
+          inputEl.value = value;
+        }
+        updateSecondaryStats();
+        if (typeof updateAllSkillDisplays === "function") updateAllSkillDisplays();
+      }
+
+      function rollAllAttributes() {
+        for (const attr of ATTR_CONFIG) {
+          let value = 0;
+          if (attr.rollType === "3d6x5") {
+            value = roll3d6x5();
+          } else if (attr.rollType === "2d6plus6x5") {
+            value = roll2d6plus6x5();
+          } else {
+            value = roll3d6x5();
+          }
+          const input = document.querySelector(
+            `[data-attr-input="${attr.key}"]`
+          );
+          if (input) {
+            input.value = value;
+          }
+          updateDerived(attr.key, value);
+        }
+        updateSecondaryStats();
+      }
+
+      function collectInvestigator() {
+        const name = document.getElementById("name").value.trim();
+        const occupation = document
+          .getElementById("occupation")
+          .value.trim();
+        const age = Number(
+          document.getElementById("age").value.trim() || 0
+        );
+        const gender = document.getElementById("gender").value.trim();
+        const residence = document
+          .getElementById("residence")
+          .value.trim();
+        const background = document
+          .getElementById("background")
+          .value.trim();
+        const approvedBy = document
+          .getElementById("approvedBy")
+          .value.trim();
+        const recordPlace = document
+          .getElementById("recordPlace")
+          .value.trim();
+
+        const attributes = {};
+        for (const attr of ATTR_CONFIG) {
+          const input = document.querySelector(
+            `[data-attr-input="${attr.key}"]`
+          );
+          const value = clampAttribute(
+            Number(input?.value ? input.value : 0)
+          );
+          const levels = COCCalculator.getLevels(value);
+          attributes[attr.key] = {
+            value: levels.normal,
+            half: levels.hard,
+            fifth: levels.extreme,
+          };
+        }
+
+        const skills = {};
+        for (const skill of SkillDatabase) {
+          const occInput = document.querySelector(`[data-skill-occ="${CSS.escape(skill.name)}"]`);
+          const intInput = document.querySelector(`[data-skill-int="${CSS.escape(skill.name)}"]`);
+          const totalEl = document.querySelector(`[data-skill-total="${CSS.escape(skill.name)}"]`);
+          const occ = Number(occInput?.value || 0);
+          const interest = Number(intInput?.value || 0);
+          const total = Number(totalEl?.textContent || 0);
+          skills[skill.name] = {
+            occ: Number.isNaN(occ) ? 0 : occ,
+            interest: Number.isNaN(interest) ? 0 : interest,
+            total: Number.isNaN(total) ? occ + interest : total
+          };
+        }
+
+        return {
+          id: Date.now(),
+          name,
+          occupation,
+          age: Number.isNaN(age) ? 0 : age,
+          gender,
+          residence,
+          background,
+          approvedBy,
+          recordPlace,
+          attributes,
+          skills,
+          createdAt: new Date().toISOString(),
+        };
+      }
+
+      async function saveInvestigator() {
+        const data = collectInvestigator();
+        if (!data.name) {
+          showToast("请至少填写调查员姓名。");
+          return;
+        }
+        const dataString = JSON.stringify(data);
+        try {
+          localStorage.setItem(STORAGE_KEY, dataString);
+        } catch (e) {
+          console.error("本地存储异常:", e);
+        }
+        try {
+          const res = await fetch(ARKHAM_API_BASE + "/api/investigator", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ clientId: getClientId(), data }),
+          });
+          const result = await res.json().catch(() => ({}));
+          if (res.ok && result.ok) {
+            showToast("调查员档案已保存至数据库，跑团大厅将使用本档案。");
+          } else {
+            showToast("已保存至本地；同步到数据库失败，请先启动后端（运行 server 下的启动后端.bat）。");
+          }
+        } catch (e) {
+          showToast("已保存至本地；同步到数据库失败，请先启动后端（运行 server 下的启动后端.bat）。");
+        }
+      }
+
+      async function saveCharacterToHall(characterState) {
+        var dataString = JSON.stringify(characterState);
+        try {
+          localStorage.setItem(STORAGE_KEY, dataString);
+          sessionStorage.setItem(STORAGE_KEY, dataString);
+        } catch (e) {}
+        window.__pendingKeeperInvestigator = characterState;
+        showToast("已保存，正在跳转至跑团大厅…");
+        showView('keeper');
+        try {
+          var res = await fetch(ARKHAM_API_BASE + "/api/investigator", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ clientId: getClientId(), data: characterState }),
+          });
+          var result = await res.json().catch(function() { return {}; });
+          if (res.ok && result.ok) showToast("已同步至数据库。");
+        } catch (e) {}
+      }
+
+      function loadInvestigatorIfAny() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          rollAllAttributes();
+          return;
+        }
+        try {
+          const data = JSON.parse(raw);
+          if (data.name) {
+            document.getElementById("name").value = data.name || "";
+          }
+          if (data.occupation) {
+            document.getElementById("occupation").value =
+              data.occupation || "";
+          }
+          if (typeof data.age === "number") {
+            document.getElementById("age").value =
+              data.age > 0 ? data.age : "";
+          }
+          if (data.gender) {
+            document.getElementById("gender").value = data.gender || "";
+          }
+          if (data.residence) {
+            document.getElementById("residence").value =
+              data.residence || "";
+          }
+          if (data.background) {
+            document.getElementById("background").value =
+              data.background || "";
+          }
+          if (data.approvedBy) {
+            document.getElementById("approvedBy").value =
+              data.approvedBy || "";
+          }
+          if (data.recordPlace) {
+            document.getElementById("recordPlace").value =
+              data.recordPlace || "";
+          }
+
+          if (data.attributes) {
+            for (const attr of ATTR_CONFIG) {
+              const attrData = data.attributes[attr.key];
+              if (!attrData) continue;
+              const input = document.querySelector(
+                `[data-attr-input="${attr.key}"]`
+              );
+              if (input) {
+                input.value = attrData.value ?? 0;
+              }
+              updateDerived(attr.key, attrData.value ?? 0);
+            }
+          } else {
+            rollAllAttributes();
+          }
+
+          renderSkillRows(data.skills || null);
+          updateSecondaryStats();
+        } catch (e) {
+          console.error("Failed to parse investigator:", e);
+          rollAllAttributes();
+          renderSkillRows(null);
+        }
+      }
+
+      function resetForm() {
+        document.getElementById("name").value = "";
+        document.getElementById("occupation").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("gender").value = "";
+        const residenceInput = document.getElementById("residence");
+        if (residenceInput) residenceInput.value = "";
+        document.getElementById("background").value = "";
+        const approvedByInput = document.getElementById("approvedBy");
+        if (approvedByInput) approvedByInput.value = "";
+        const recordPlaceInput = document.getElementById("recordPlace");
+        if (recordPlaceInput) recordPlaceInput.value = "";
+        for (const attr of ATTR_CONFIG) {
+          const input = document.querySelector(
+            `[data-attr-input="${attr.key}"]`
+          );
+          if (input) input.value = 0;
+          updateDerived(attr.key, 0);
+        }
+        rollAllAttributes();
+        renderSkillRows(null);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderAttributeRows();
+        renderSkillRows(null);
+        loadInvestigatorIfAny();
+
+        document
+          .getElementById("roll-attributes")
+          .addEventListener("click", () => {
+            rollAllAttributes();
+          });
+
+        document
+          .getElementById("save-investigator")
+          .addEventListener("click", () => {
+            saveInvestigator();
+          });
+
+        document
+          .getElementById("save-and-go-keeper")
+          .addEventListener("click", () => {
+            const data = collectInvestigator();
+            if (!data.name || !data.name.trim()) {
+              showToast("请至少填写调查员姓名后再进入跑团大厅。");
+              return;
+            }
+            showToast("已保存，正在跳转至跑团大厅…");
+            saveCharacterToHall(data);
+          });
+
+        document
+          .getElementById("reset-form")
+          .addEventListener("click", () => {
+            resetForm();
+          });
+
+        const attrContainer = document.getElementById("attribute-grid");
+        attrContainer.addEventListener("input", (e) => {
+          const target = e.target;
+          if (!(target instanceof HTMLInputElement)) return;
+          const attrKey = target.dataset.attrInput;
+          if (!attrKey) return;
+          const value = clampAttribute(Number(target.value || 0));
+          updateDerived(attrKey, value);
+        });
+
+        const ageInput = document.getElementById("age");
+        if (ageInput) {
+          ageInput.addEventListener("input", () => {
+            updateSecondaryStats();
+          });
+        }
+
+        const skillsContainer = document.getElementById("skills-container");
+        if (skillsContainer) skillsContainer.addEventListener("input", () => updateAllSkillDisplays());
+      });
+    </script>
+
+    <!-- Vue 响应式联动层：用 COCCalculator 与 OccupationDatabase 驱动联动 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script>
+      (function () {
+        const { reactive, watchEffect } = Vue;
+
+        const SKILL_MAP = {};
+        if (typeof SkillDatabase !== "undefined") {
+          for (const s of SkillDatabase) SKILL_MAP[s.name] = s;
+        }
+
+        const state = reactive({
+          attrs: {
+            STR: 0,
+            CON: 0,
+            DEX: 0,
+            APP: 0,
+            POW: 0,
+            SIZ: 0,
+            INT: 0,
+            EDU: 0,
+          },
+          age: 0,
+          occupation: "",
+          // skills[key] = { occ, interest }
+          skills: {},
+          occPointsRemaining: 0,
+          interestPointsRemaining: 0,
+        });
+
+        function getCurrentOccupationMeta() {
+          const occ = OccupationDatabase[state.occupation];
+          return (
+            occ || {
+              cr: { min: 0, max: 99 },
+              formula: (s) => s.edu * 4,
+              formulaText: "EDU × 4",
+              skills: [],
+            }
+          );
+        }
+
+        function initFromDOM() {
+          document
+            .querySelectorAll("[data-attr-input]")
+            .forEach((inputEl) => {
+              const key = inputEl.getAttribute("data-attr-input");
+              if (!key) return;
+              state.attrs[key] = clampAttribute(Number(inputEl.value || 0));
+              inputEl.addEventListener("input", () => {
+                state.attrs[key] = clampAttribute(
+                  Number(inputEl.value || 0)
+                );
+              });
+            });
+
+          const ageInput = document.getElementById("age");
+          if (ageInput) {
+            state.age = Number(ageInput.value || 0);
+            ageInput.addEventListener("input", () => {
+              state.age = Number(ageInput.value || 0);
+            });
+          }
+
+          const occSelect = document.getElementById("occupation");
+          if (occSelect) {
+            state.occupation = occSelect.value || "";
+            occSelect.addEventListener("change", () => {
+              state.occupation = occSelect.value || "";
+            });
+          }
+
+          document
+            .querySelectorAll("[data-skill-occ]")
+            .forEach((inputEl) => {
+              const key = inputEl.getAttribute("data-skill-occ");
+              if (!key) return;
+              if (!state.skills[key]) {
+                state.skills[key] = { occ: 0, interest: 0 };
+              }
+              state.skills[key].occ = Number(inputEl.value || 0);
+              inputEl.addEventListener("input", () => {
+                if (!state.skills[key]) {
+                  state.skills[key] = { occ: 0, interest: 0 };
+                }
+                state.skills[key].occ = Number(inputEl.value || 0);
+              });
+            });
+
+          document
+            .querySelectorAll("[data-skill-int]")
+            .forEach((inputEl) => {
+              const key = inputEl.getAttribute("data-skill-int");
+              if (!key) return;
+              if (!state.skills[key]) {
+                state.skills[key] = { occ: 0, interest: 0 };
+              }
+              state.skills[key].interest = Number(inputEl.value || 0);
+              inputEl.addEventListener("input", () => {
+                if (!state.skills[key]) {
+                  state.skills[key] = { occ: 0, interest: 0 };
+                }
+                state.skills[key].interest = Number(inputEl.value || 0);
+              });
+            });
+        }
+
+        function computePoints() {
+          const occMeta = getCurrentOccupationMeta();
+          const stats = {
+            edu: state.attrs.EDU,
+            str: state.attrs.STR,
+            dex: state.attrs.DEX,
+            app: state.attrs.APP,
+          };
+          const occTotal = getOccupationPoints(state.occupation, stats) || 0;
+          const interestTotal =
+            COCCalculator.calculateInterestPoints(state.attrs.INT) || 0;
+
+          let occUsed = 0;
+          let interestUsed = 0;
+
+          for (const key in SKILL_MAP) {
+            const s = state.skills[key] || { occ: 0, interest: 0 };
+            occUsed += Math.max(0, Number(s.occ) || 0);
+            interestUsed += Math.max(0, Number(s.interest) || 0);
+          }
+
+          state.occPointsRemaining = occTotal - occUsed;
+          state.interestPointsRemaining = interestTotal - interestUsed;
+        }
+
+        function updateDerivedDisplays() {
+          for (const key in state.attrs) {
+            updateDerived(key, state.attrs[key]);
+          }
+          updateSecondaryStats();
+          if (typeof updateAllSkillDisplays === "function") updateAllSkillDisplays();
+        }
+
+        function highlightOccupationSkillsAndValidateCredit() {
+          const occMeta = getCurrentOccupationMeta();
+          const occSet = new Set(occMeta.skills || []);
+          const stats = { edu: state.attrs.EDU, str: state.attrs.STR, dex: state.attrs.DEX, app: state.attrs.APP };
+          const occTotal = getOccupationPoints(state.occupation, stats) || 0;
+          const interestTotal = COCCalculator.calculateInterestPoints(state.attrs.INT) || 0;
+
+          document.querySelectorAll("[data-skill-row]").forEach((rowEl) => {
+            const skillName = rowEl.getAttribute("data-skill-name") || rowEl.getAttribute("data-skill-row");
+            if (!skillName) return;
+            const isOcc = occSet.has(skillName);
+            const badge = rowEl.querySelector("[data-occ-badge]");
+            if (badge) {
+              if (isOcc) {
+                badge.textContent = "本职";
+                badge.setAttribute("data-visible", "true");
+                rowEl.classList.add("bg-amber-50");
+                rowEl.onclick = (e) => {
+                  if (e.target.tagName !== "INPUT") {
+                    const occInput = rowEl.querySelector("[data-skill-occ]");
+                    if (occInput) occInput.focus();
+                  }
+                };
+              } else {
+                badge.textContent = " ";
+                badge.removeAttribute("data-visible");
+                rowEl.classList.remove("bg-amber-50");
+                rowEl.onclick = null;
+              }
+            } else {
+              if (isOcc) rowEl.classList.add("bg-amber-50");
+              else rowEl.classList.remove("bg-amber-50");
+            }
+          });
+
+          const creditOccInput = document.querySelector('[data-skill-occ="信用评级"]');
+          const creditIntInput = document.querySelector('[data-skill-int="信用评级"]');
+          const creditState = state.skills["信用评级"] || { occ: 0, interest: 0 };
+          const totalCR = (Number(creditState.occ) || 0) + (Number(creditState.interest) || 0);
+          const check = checkCRRange(state.occupation, totalCR);
+          [creditOccInput, creditIntInput].forEach((input) => {
+            if (!input) return;
+            input.classList.toggle("border-red-600", !check.valid);
+            input.classList.toggle("text-red-600", !check.valid);
+          });
+
+          const balanceOccEl = document.getElementById("balance-occ");
+          const balanceIntEl = document.getElementById("balance-interest");
+          const remOcc = state.occPointsRemaining;
+          const remInt = state.interestPointsRemaining;
+          if (balanceOccEl) {
+            balanceOccEl.innerHTML = `剩余职业点：<strong>${remOcc}</strong> / 总额 ${occTotal}`;
+            balanceOccEl.classList.toggle("text-red-600", remOcc < 0);
+          }
+          if (balanceIntEl) {
+            balanceIntEl.innerHTML = `剩余兴趣点：<strong>${remInt}</strong> / 总额 ${interestTotal}`;
+            balanceIntEl.classList.toggle("text-red-600", remInt < 0);
+          }
+          const topOccEl = document.getElementById("top-occ-remaining");
+          const topIntEl = document.getElementById("top-interest-remaining");
+          if (topOccEl) {
+            topOccEl.innerHTML = `剩余职业点：<strong>${remOcc}</strong> / ${occTotal}`;
+            topOccEl.classList.toggle("text-red-600", remOcc < 0);
+          }
+          if (topIntEl) {
+            topIntEl.innerHTML = `剩余兴趣点：<strong>${remInt}</strong> / ${interestTotal}`;
+            topIntEl.classList.toggle("text-red-600", remInt < 0);
+          }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          initFromDOM();
+          watchEffect(() => {
+            updateDerivedDisplays();
+            computePoints();
+            highlightOccupationSkillsAndValidateCredit();
+          });
+        });
+      })();
+    </script>
+    <script>
+      // STORAGE_KEY 已在前面脚本中定义为 "arkham_investigator_data"，此处直接使用
+
+      function loadCharacterInHall() {
+        const rawData = localStorage.getItem(STORAGE_KEY);
+        if (!rawData) return null;
+        try {
+          return JSON.parse(rawData);
+        } catch (e) {
+          console.error("解析数据失败:", e);
+          return null;
+        }
+      }
+
+      window.debugStorage = function () {
+        console.log("--- LocalStorage 状态报告 ---");
+        console.log("目标 Key:", STORAGE_KEY);
+        console.log("是否存在内容:", !!localStorage.getItem(STORAGE_KEY));
+        console.log("原始数据:", localStorage.getItem(STORAGE_KEY));
+      };
+
+      function renderInvestigatorToPanel(inv) {
+        var panel = document.getElementById("investigator-panel");
+        if (!panel || !inv) return;
+        var attrs = inv.attributes || {};
+        var con = Number(attrs.CON && attrs.CON.value !== undefined ? attrs.CON.value : 0) || 0;
+        var siz = Number(attrs.SIZ && attrs.SIZ.value !== undefined ? attrs.SIZ.value : 0) || 0;
+        var pow = Number(attrs.POW && attrs.POW.value !== undefined ? attrs.POW.value : 0) || 0;
+        var hp = Math.floor((con + siz) / 10);
+        var san = pow;
+        var dex = (attrs.DEX && attrs.DEX.value !== undefined) ? attrs.DEX.value : "-";
+        function fmt(key) {
+          var a = attrs[key];
+          if (!a) return "-";
+          return a.value + " (" + (a.half || 0) + "/" + (a.fifth || 0) + ")";
+        }
+        panel.innerHTML =
+          '<div class="flex items-start justify-between gap-2"><div><div class="flex items-center gap-2 mb-0.5">' +
+          '<span class="text-sm font-semibold text-slate-50">' + (inv.name || "未命名调查员") + '</span>' +
+          (inv.occupation ? '<span class="px-1.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-600/80 text-[10px] text-slate-200">' + inv.occupation + '</span>' : '') +
+          '</div><div class="text-[11px] text-slate-300 mt-1 flex items-center gap-3">' +
+          '<span>HP <span class="text-slate-50 font-medium">' + hp + '</span></span>' +
+          '<span>SAN <span class="text-slate-50 font-medium">' + san + '</span></span>' +
+          '<span>DEX <span class="text-slate-50 font-medium">' + dex + '</span></span>' +
+          '</div><div class="text-[11px] text-slate-400 mb-1 mt-0.5">' +
+          (inv.age ? '年龄：<span class="text-slate-200">' + inv.age + '</span> ' : '') +
+          (inv.gender ? ' / 性别：<span class="text-slate-200">' + inv.gender + '</span>' : '') +
+          '</div></div></div>' +
+          '<div class="grid grid-cols-3 gap-1.5 mt-1.5 text-[11px]">' +
+          '<div>STR：<span class="text-slate-50">' + fmt("STR") + '</span></div>' +
+          '<div>CON：<span class="text-slate-50">' + fmt("CON") + '</span></div>' +
+          '<div>DEX：<span class="text-slate-50">' + fmt("DEX") + '</span></div>' +
+          '<div>APP：<span class="text-slate-50">' + fmt("APP") + '</span></div>' +
+          '<div>POW：<span class="text-slate-50">' + fmt("POW") + '</span></div>' +
+          '<div>SIZ：<span class="text-slate-50">' + fmt("SIZ") + '</span></div>' +
+          '<div>INT：<span class="text-slate-50">' + fmt("INT") + '</span></div>' +
+          '<div>EDU：<span class="text-slate-50">' + fmt("EDU") + '</span></div>' +
+          '<div>LUCK：<span class="text-slate-50">' + fmt("LCK") + '</span></div>' +
+          '</div><div class="mt-2.5 border-t border-slate-800/80 pt-1.5">' +
+          '<div class="text-[11px] text-slate-400 mb-1">背景摘要：</div>' +
+          '<p class="text-[11px] text-slate-300 max-h-20 overflow-y-auto scrollbar-thin">' + (inv.background || "（尚未填写背景，将使用更为中性的开场白。）") + '</p></div>';
+      }
+
+      window.applyInvestigatorToKeeper = function(inv) {
+        if (!inv) return;
+        currentInvestigator = inv;
+        renderInvestigatorToPanel(inv);
+      };
+
+      function loadInvestigator() {
+        var panel = document.getElementById("investigator-panel");
+        if (!panel) return null;
+        var rawData = localStorage.getItem(STORAGE_KEY);
+        if (!rawData) {
+          panel.innerHTML = '<p class="text-[11px] text-slate-400">尚未找到调查员档案。请先前往 <button type="button" onclick="showView(\'investigator\')" class="underline underline-offset-2 text-slate-200">角色卡建立</button> 页面创建并保存角色。</p>';
+          return null;
+        }
+        try {
+          var inv = JSON.parse(rawData);
+          renderInvestigatorToPanel(inv);
+          return inv;
+        } catch (e) {
+          console.error("Failed to load investigator:", e);
+          panel.innerHTML = '<p class="text-[11px] text-red-400">本地调查员数据损坏，请返回“角色卡建立”页面重新保存。</p>';
+          return null;
+        }
+      }
+      window.refreshKeeperInvestigator = loadInvestigator;
+
+      let currentInvestigator = null;
+      let currentModuleText = "";
+      let messageId = 0;
+      let keeperChatHistory = [];
+
+      function appendMessage(role, text) {
+        keeperChatHistory.push({ role: role === "user" ? "user" : "model", text: text });
+        if (keeperChatHistory.length > 20) keeperChatHistory = keeperChatHistory.slice(-20);
+        const log = document.getElementById("chat-log");
+        const wrapper = document.createElement("div");
+        wrapper.dataset.messageId = String(++messageId);
+
+        const isUser = role === "user";
+        wrapper.className = `flex ${
+          isUser ? "justify-end" : "justify-start"
+        }`;
+
+        const bubble = document.createElement("div");
+        bubble.className =
+          "max-w-[80%] rounded-2xl px-3 py-2 text-xs leading-relaxed shadow-sm " +
+          (isUser
+            ? "bg-indigo-600 text-slate-50 rounded-br-sm"
+            : "bg-slate-900/90 border border-slate-700/80 text-slate-100 rounded-bl-sm");
+
+        const nameLabel = document.createElement("div");
+        nameLabel.className =
+          "mb-0.5 text-[10px] uppercase tracking-[0.18em] text-slate-400";
+        nameLabel.textContent = isUser ? "INVESTIGATOR" : "KEEPER · AI";
+
+        const content = document.createElement("div");
+        content.textContent = text;
+
+        bubble.appendChild(nameLabel);
+        bubble.appendChild(content);
+        wrapper.appendChild(bubble);
+        log.appendChild(wrapper);
+        log.scrollTop = log.scrollHeight;
+      }
+
+      function mockKeeperReply() {
+        var tone = "空气骤然凝滞，一阵不祥的预感攥紧了你的心脏——你隐约意识到，某种早已潜伏的东西正在被你的举动激活。";
+        return tone + "\n\n我已经根据当前已知的模组信息与调查员背景，记录下你的这一行动。\n（请先启动后端并配置 DEEPSEEK 或 GEMINI API Key；若报 Insufficient Balance 请到对应平台充值后再试。）";
+      }
+
+      /** 调用后端守秘人对话 API，角色卡与模组由后端传给 AI 用于数值检定与叙事 */
+      async function fetchKeeperResponseFromBackend(character, moduleContext, chatHistory, userMessage) {
+        var url = ARKHAM_API_BASE + "/api/keeper/chat";
+        var body = {
+          character: character || {},
+          moduleContext: moduleContext || "",
+          chatHistory: (chatHistory || []).map(function(m) { return { role: m.role, content: m.text }; }),
+          userMessage: userMessage || ""
+        };
+        var res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        var data = await res.json().catch(function() { return {}; });
+        if (res.ok && data.ok && typeof data.text === "string") return data.text;
+        throw new Error(data.error || "守秘人接口返回异常");
+      }
+
+      /** 模组上传成功后，请求守秘人根据模组与调查员背景写一段导入文案并追加到聊天 */
+      function requestIntroAfterModuleUpload() {
+        var character = currentInvestigator || window.__keeperCurrentInvestigator;
+        if (!currentModuleText) return;
+        fetch(ARKHAM_API_BASE + "/api/keeper/intro", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ character: character || {}, moduleContext: currentModuleText })
+        })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.ok && data.text && data.text.trim()) {
+              appendMessage("assistant", "【导入】\n\n" + data.text.trim());
+            }
+          })
+          .catch(function() {});
+      }
+
+      /** 调用后端解析 PDF 模组（由后端调 AI 提取大纲） */
+      async function parseModulePdfWithBackend(file, previewEl) {
+        previewEl.textContent = "正在请 AI 解析模组 PDF…";
+        var url = ARKHAM_API_BASE + "/api/keeper/parse-module";
+        var form = new FormData();
+        form.append("file", file);
+        try {
+          var res = await fetch(url, { method: "POST", body: form });
+          var data = await res.json().catch(function() { return {}; });
+          if (res.ok && data.ok && typeof data.moduleText === "string") {
+            currentModuleText = data.moduleText;
+            var firstLines = data.moduleText.split(/\r?\n/).slice(0, 16).join("\n");
+            previewEl.textContent = firstLines || "（AI 已解析完成，无文本输出）";
+            requestIntroAfterModuleUpload();
+          } else {
+            var errMsg = data.error || res.statusText || "未知错误";
+          previewEl.textContent = "AI 解析失败：" + errMsg + (errMsg.indexOf("不支持 PDF") !== -1 ? "" : "。请确认后端已启动并已配置 DEEPSEEK 或 GEMINI API Key。");
+          }
+        } catch (e) {
+          console.error("解析 PDF 请求失败", e);
+          previewEl.textContent = "请求失败：" + (e.message || String(e)) + "。请先启动后端（运行 server 下的启动后端.bat）。";
+        }
+      }
+
+      async function handleUserMessage(text) {
+        var indicator = document.getElementById("typing-indicator");
+        if (indicator) indicator.classList.remove("hidden");
+        var reply;
+        try {
+          var character = currentInvestigator || window.__keeperCurrentInvestigator;
+          var chatHistoryWithoutCurrent = keeperChatHistory.slice(0, -1);
+          reply = await fetchKeeperResponseFromBackend(character, currentModuleText, chatHistoryWithoutCurrent, text);
+        } catch (e) {
+          await new Promise(function(r) { setTimeout(r, 400); });
+          reply = "（守秘人回复失败：" + (e.message || String(e)) + "。）\n\n" + mockKeeperReply();
+        } finally {
+          if (indicator) indicator.classList.add("hidden");
+        }
+        appendMessage("assistant", reply);
+      }
+
+      function attachModuleUpload() {
+        const input = document.getElementById("module-file");
+        const filenameEl = document.getElementById("module-filename");
+        const previewEl = document.getElementById("module-preview");
+        if (!input || !filenameEl || !previewEl) return;
+
+        input.addEventListener("change", async () => {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          filenameEl.textContent = file.name;
+          var isPdf = file.type === "application/pdf" || (file.name && file.name.toLowerCase().endsWith(".pdf"));
+          if (isPdf) {
+            await parseModulePdfWithBackend(file, previewEl);
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = () => {
+            const text = String(reader.result || "");
+            currentModuleText = text;
+            const firstLines = text.split(/\r?\n/).slice(0, 16).join("\n");
+            previewEl.textContent =
+              firstLines ||
+              "文件为空，或无法读取内容。请确认模组文件是否为纯文本。";
+            if (text.trim()) requestIntroAfterModuleUpload();
+          };
+          reader.onerror = () => {
+            previewEl.textContent = "读取文件失败，请重试。";
+          };
+          reader.readAsText(file, "utf-8");
+        });
+      }
+
+      /** 加载内置模组（server/modules/builtin.txt），有内容则设为当前模组并请求导入文案 */
+      function loadBuiltinModule() {
+        fetch(ARKHAM_API_BASE + "/api/keeper/builtin-module")
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (!data.ok || !data.moduleText || !data.moduleText.trim()) return;
+            currentModuleText = data.moduleText;
+            var previewEl = document.getElementById("module-preview");
+            var filenameEl = document.getElementById("module-filename");
+            if (previewEl) previewEl.textContent = data.moduleText.split(/\r?\n/).slice(0, 16).join("\n");
+            if (filenameEl) filenameEl.textContent = "内置模组";
+            requestIntroAfterModuleUpload();
+          })
+          .catch(function() {});
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        currentInvestigator = loadInvestigator();
+        attachModuleUpload();
+
+        const chatLog = document.getElementById("chat-log");
+        chatLog.innerHTML = "";
+        appendMessage(
+          "assistant",
+          "这里是阿卡姆机密档案馆的地下会客厅，一盏旧灯在你头顶微微摇晃，昏黄的光线在桌面上铺开一圈模糊的光晕——\n\n我是本场跑团的 AI 守秘人，你可以上传模组、选择已经创建好的调查员，然后用自然语言描述你的行动。从现在开始，你说的每一句话都会被记录进这份卷宗。"
+        );
+        loadBuiltinModule();
+
+        const form = document.getElementById("chat-form");
+        const input = document.getElementById("chat-input");
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const text = input.value.trim();
+          if (!text) return;
+          appendMessage("user", text);
+          input.value = "";
+          handleUserMessage(text);
+        });
+
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            form.dispatchEvent(new Event("submit", { cancelable: true }));
+          }
+        });
+
+        document
+          .getElementById("refresh-investigator")
+          .addEventListener("click", () => {
+            currentInvestigator = loadInvestigator();
+          });
+
+        function updateBackendStatus() {
+          var el = document.getElementById("keeper-backend-status");
+          if (!el) return;
+          function setStatus(connected, isError) {
+            el.textContent = connected === true ? "已连接" : (connected === false ? "未连接" : "异常");
+            el.className = "text-[10px] " + (connected === true ? "text-emerald-400" : "text-red-400");
+          }
+          var timeoutMs = 4000;
+          var timeoutPromise = new Promise(function(_, reject) {
+            setTimeout(function() { reject(new Error("timeout")); }, timeoutMs);
+          });
+          var fetchPromise = fetch(ARKHAM_API_BASE + "/api/health")
+            .then(function(r) { return r.json(); })
+            .then(function(data) { if (data && data.ok) setStatus(true); else setStatus(null); return data; });
+          Promise.race([fetchPromise, timeoutPromise]).then(function() {}).catch(function() { setStatus(false); });
+          setTimeout(function() {
+            if (el.textContent.indexOf("检测") !== -1) setStatus(false);
+          }, timeoutMs + 1000);
+        }
+        updateBackendStatus();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,580 @@
+{
+  "0b1fc386-9860-465c-a1ba-845dade076a1": {
+    "data": {
+      "id": 1771995115788,
+      "name": "呱",
+      "occupation": "",
+      "age": 0,
+      "gender": "",
+      "residence": "",
+      "background": "",
+      "approvedBy": "",
+      "recordPlace": "",
+      "attributes": {
+        "STR": {
+          "value": 55,
+          "half": 27,
+          "fifth": 11
+        },
+        "CON": {
+          "value": 60,
+          "half": 30,
+          "fifth": 12
+        },
+        "DEX": {
+          "value": 30,
+          "half": 15,
+          "fifth": 6
+        },
+        "APP": {
+          "value": 45,
+          "half": 22,
+          "fifth": 9
+        },
+        "POW": {
+          "value": 55,
+          "half": 27,
+          "fifth": 11
+        },
+        "SIZ": {
+          "value": 60,
+          "half": 30,
+          "fifth": 12
+        },
+        "INT": {
+          "value": 55,
+          "half": 27,
+          "fifth": 11
+        },
+        "EDU": {
+          "value": 50,
+          "half": 25,
+          "fifth": 10
+        },
+        "LCK": {
+          "value": 60,
+          "half": 30,
+          "fifth": 12
+        }
+      },
+      "skills": {
+        "会计": {
+          "occ": 0,
+          "interest": 0
+        },
+        "物理": {
+          "occ": 0,
+          "interest": 0
+        },
+        "人类学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "估价": {
+          "occ": 0,
+          "interest": 0
+        },
+        "考古学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "艺术与手艺": {
+          "occ": 0,
+          "interest": 0
+        },
+        "魅力": {
+          "occ": 0,
+          "interest": 0
+        },
+        "攀爬": {
+          "occ": 0,
+          "interest": 0
+        },
+        "计算机使用": {
+          "occ": 0,
+          "interest": 0
+        },
+        "信用评级": {
+          "occ": 0,
+          "interest": 0
+        },
+        "克苏鲁神话": {
+          "occ": 0,
+          "interest": 0
+        },
+        "乔装": {
+          "occ": 0,
+          "interest": 0
+        },
+        "汽车驾驶": {
+          "occ": 0,
+          "interest": 0
+        },
+        "电气维修": {
+          "occ": 0,
+          "interest": 0
+        },
+        "电子学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "急救": {
+          "occ": 0,
+          "interest": 0
+        },
+        "历史": {
+          "occ": 0,
+          "interest": 0
+        },
+        "恐吓": {
+          "occ": 0,
+          "interest": 0
+        },
+        "跳跃": {
+          "occ": 0,
+          "interest": 0
+        },
+        "法律": {
+          "occ": 0,
+          "interest": 0
+        },
+        "图书馆使用": {
+          "occ": 0,
+          "interest": 0
+        },
+        "聆听": {
+          "occ": 0,
+          "interest": 0
+        },
+        "锁匠": {
+          "occ": 0,
+          "interest": 0
+        },
+        "机械维修": {
+          "occ": 0,
+          "interest": 0
+        },
+        "医学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "博物学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "导航": {
+          "occ": 0,
+          "interest": 0
+        },
+        "神秘学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "重型机械操作": {
+          "occ": 0,
+          "interest": 0
+        },
+        "其他语言": {
+          "occ": 0,
+          "interest": 0
+        },
+        "母语": {
+          "occ": 0,
+          "interest": 0
+        },
+        "说服": {
+          "occ": 0,
+          "interest": 0
+        },
+        "药学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "摄影": {
+          "occ": 0,
+          "interest": 0
+        },
+        "心理学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "精神分析": {
+          "occ": 0,
+          "interest": 0
+        },
+        "骑乘": {
+          "occ": 0,
+          "interest": 0
+        },
+        "科学": {
+          "occ": 0,
+          "interest": 0
+        },
+        "侦查": {
+          "occ": 0,
+          "interest": 0
+        },
+        "潜行": {
+          "occ": 0,
+          "interest": 0
+        },
+        "游泳": {
+          "occ": 0,
+          "interest": 0
+        },
+        "话术": {
+          "occ": 0,
+          "interest": 0
+        },
+        "投掷": {
+          "occ": 0,
+          "interest": 0
+        },
+        "追踪": {
+          "occ": 0,
+          "interest": 0
+        },
+        "斗殴": {
+          "occ": 0,
+          "interest": 0
+        },
+        "闪避": {
+          "occ": 0,
+          "interest": 0
+        },
+        "手枪": {
+          "occ": 0,
+          "interest": 0
+        },
+        "步枪/霰弹枪": {
+          "occ": 0,
+          "interest": 0
+        },
+        "弓箭": {
+          "occ": 0,
+          "interest": 0
+        },
+        "鞭子": {
+          "occ": 0,
+          "interest": 0
+        }
+      },
+      "createdAt": "2026-02-25T04:51:55.788Z"
+    },
+    "updated_at": "2026-02-25T04:51:55.813Z"
+  },
+  "ffe69ffe-a640-4903-8552-4c9fb5bb2013": {
+    "data": {
+      "id": 1772097822653,
+      "name": "呱",
+      "occupation": "杂技演员",
+      "age": 12,
+      "gender": "其他",
+      "residence": "111",
+      "background": "1111",
+      "approvedBy": "",
+      "recordPlace": "",
+      "attributes": {
+        "STR": {
+          "value": 15,
+          "half": 7,
+          "fifth": 3
+        },
+        "CON": {
+          "value": 55,
+          "half": 27,
+          "fifth": 11
+        },
+        "DEX": {
+          "value": 60,
+          "half": 30,
+          "fifth": 12
+        },
+        "APP": {
+          "value": 65,
+          "half": 32,
+          "fifth": 13
+        },
+        "POW": {
+          "value": 50,
+          "half": 25,
+          "fifth": 10
+        },
+        "SIZ": {
+          "value": 70,
+          "half": 35,
+          "fifth": 14
+        },
+        "INT": {
+          "value": 90,
+          "half": 45,
+          "fifth": 18
+        },
+        "EDU": {
+          "value": 70,
+          "half": 35,
+          "fifth": 14
+        },
+        "LCK": {
+          "value": 50,
+          "half": 25,
+          "fifth": 10
+        }
+      },
+      "skills": {
+        "会计": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "物理": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "人类学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "估价": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "考古学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "艺术与手艺": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "魅力": {
+          "occ": 0,
+          "interest": 0,
+          "total": 15
+        },
+        "攀爬": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "计算机使用": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "信用评级": {
+          "occ": 0,
+          "interest": 0,
+          "total": 0
+        },
+        "克苏鲁神话": {
+          "occ": 0,
+          "interest": 0,
+          "total": 0
+        },
+        "乔装": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "汽车驾驶": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "电气维修": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "电子学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "急救": {
+          "occ": 0,
+          "interest": 0,
+          "total": 30
+        },
+        "历史": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "恐吓": {
+          "occ": 0,
+          "interest": 0,
+          "total": 15
+        },
+        "跳跃": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "法律": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "图书馆使用": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "聆听": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "锁匠": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "机械维修": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "医学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "博物学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "导航": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "神秘学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "重型机械操作": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "其他语言": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "母语": {
+          "occ": 0,
+          "interest": 0,
+          "total": 70
+        },
+        "说服": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "药学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "摄影": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "心理学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "精神分析": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "骑乘": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "科学": {
+          "occ": 0,
+          "interest": 0,
+          "total": 1
+        },
+        "侦查": {
+          "occ": 0,
+          "interest": 0,
+          "total": 25
+        },
+        "潜行": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "游泳": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "话术": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        },
+        "投掷": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "追踪": {
+          "occ": 0,
+          "interest": 0,
+          "total": 10
+        },
+        "斗殴": {
+          "occ": 0,
+          "interest": 10,
+          "total": 35
+        },
+        "闪避": {
+          "occ": 0,
+          "interest": 0,
+          "total": 30
+        },
+        "手枪": {
+          "occ": 0,
+          "interest": 0,
+          "total": 20
+        },
+        "步枪/霰弹枪": {
+          "occ": 0,
+          "interest": 0,
+          "total": 25
+        },
+        "弓箭": {
+          "occ": 0,
+          "interest": 0,
+          "total": 15
+        },
+        "鞭子": {
+          "occ": 0,
+          "interest": 0,
+          "total": 5
+        }
+      },
+      "createdAt": "2026-02-26T09:23:42.653Z"
+    },
+    "updated_at": "2026-02-26T09:23:42.667Z"
+  }
+}

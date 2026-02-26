@@ -1,0 +1,19 @@
+# 依赖
+node_modules/
+server/node_modules/
+
+# 环境与密钥（勿提交）
+.env
+server/.env
+*.env.local
+
+# 数据库（可选：每人本地一份）
+server/arkham.db
+*.db
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/
