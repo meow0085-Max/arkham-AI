@@ -76,6 +76,38 @@
         background: rgba(30, 64, 175, 0.5);
         border-radius: 9999px;
       }
+
+      /* CoC 7th 规则说明浮窗：悬停属性/技能时显示 */
+      .coc-rule-tooltip {
+        position: fixed;
+        z-index: 9999;
+        max-width: 300px;
+        padding: 10px 12px;
+        background: rgba(15, 23, 42, 0.94);
+        color: #e2e8f0;
+        font-size: 11px;
+        line-height: 1.45;
+        border-radius: 8px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        pointer-events: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.1s ease;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      }
+      .coc-rule-tooltip.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+      .coc-rule-tooltip .coc-rule-tooltip-title {
+        font-weight: 600;
+        color: #f8fafc;
+        margin-bottom: 4px;
+        font-size: 11px;
+      }
+      .coc-rule-tooltip .coc-rule-tooltip-body {
+        color: #cbd5e1;
+      }
     
     </style>
   
@@ -349,7 +381,9 @@
                   <div class="space-y-2 text-center text-xs text-slate-800">
                     <div class="grid grid-cols-3 gap-3">
                       <div
-                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 cursor-help"
+                        data-coc-tooltip-type="derived"
+                        data-coc-tooltip-id="hp"
                       >
                         <div class="text-[11px] tracking-[0.16em] uppercase">
                           HP
@@ -362,7 +396,9 @@
                         </div>
                       </div>
                       <div
-                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 cursor-help"
+                        data-coc-tooltip-type="derived"
+                        data-coc-tooltip-id="san"
                       >
                         <div class="text-[11px] tracking-[0.16em] uppercase">
                           SAN
@@ -375,7 +411,9 @@
                         </div>
                       </div>
                       <div
-                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 cursor-help"
+                        data-coc-tooltip-type="derived"
+                        data-coc-tooltip-id="mp"
                       >
                         <div class="text-[11px] tracking-[0.16em] uppercase">
                           MP
@@ -390,7 +428,9 @@
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                       <div
-                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 text-left"
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 text-left cursor-help"
+                        data-coc-tooltip-type="derived"
+                        data-coc-tooltip-id="db-build"
                       >
                         <div class="text-[11px] tracking-[0.14em] uppercase">
                           DB / BUILD
@@ -412,7 +452,9 @@
                         </div>
                       </div>
                       <div
-                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2"
+                        class="border border-slate-500/70 bg-[#e0ddd5] px-3 py-2 cursor-help"
+                        data-coc-tooltip-type="derived"
+                        data-coc-tooltip-id="mov"
                       >
                         <div class="text-[11px] tracking-[0.16em] uppercase">
                           MOV
@@ -554,6 +596,7 @@
             </div>
           </div>
         </section>
+        <div id="coc-rule-tooltip" class="coc-rule-tooltip" role="tooltip" aria-hidden="true"></div>
       </div>
         <div id="view-keeper" class="view hidden">
         <section class="max-w-6xl mx-auto px-4 py-4 md:py-6">
@@ -720,12 +763,12 @@
                   <span id="keeper-backend-status" class="text-[10px] text-slate-500">检测中…</span>
                 </div>
                 <p class="text-[11px] text-slate-500 mb-2">
-                  守秘人对话与 PDF 模组解析由后端调用 Gemini 完成。请先启动后端（运行
+                  守秘人对话与 PDF 模组解析由后端调用 DeepSeek（或 Gemini）完成。请先启动后端（运行
                   <code class="text-[10px] px-1 rounded bg-slate-900/80">server/启动后端.bat</code>），并在服务端配置环境变量
-                  <code class="text-[10px] px-1 rounded bg-slate-900/80">GEMINI_API_KEY</code>。
+                  <code class="text-[10px] px-1 rounded bg-slate-900/80">DEEPSEEK_API_KEY</code> 或 <code class="text-[10px] px-1 rounded bg-slate-900/80">GEMINI_API_KEY</code>。
                 </p>
                 <p class="text-[10px] text-slate-500">
-                  获取 Key（免费）：<a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="text-indigo-400 underline">Google AI Studio → Get API key</a>
+                  获取 Key：<a href="https://platform.deepseek.com" target="_blank" rel="noopener" class="text-indigo-400 underline">DeepSeek 控制台</a>（推荐）或 <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="text-indigo-400 underline">Google AI Studio</a>
                 </p>
               </section>
             </aside>
@@ -940,7 +983,7 @@
       const ARKHAM_API_BASE =
         typeof window !== "undefined" && window.ARKHAM_API_BASE != null
           ? window.ARKHAM_API_BASE
-          : (typeof window !== "undefined" && window.location && window.location.origin && !/^https?:\/\/localhost(:\d+)?$/i.test(window.location.origin)
+          : (typeof window !== "undefined" && window.location && window.location.origin && typeof window.location.origin === "string" && window.location.origin.startsWith("http")
               ? window.location.origin
               : "http://localhost:3000");
 
@@ -1167,6 +1210,69 @@
         { name: "弓箭", base: 15, category: "战斗" },
         { name: "鞭子", base: 5, category: "战斗" },
       ];
+
+      /** CoC 7th 规则书：技能简短说明（悬停浮窗用） */
+      const SKILL_DESCRIPTIONS = {
+        "会计": "处理账目、审计与财务记录。可用于识破伪造、追踪资金流向。",
+        "物理": "物理学知识与实验。可用于分析力学、电磁等现象。",
+        "人类学": "研究人类文化与习俗。可用于理解异族行为、鉴定文物年代。",
+        "估价": "判断物品价值与真伪。可用于古董、艺术品或赃物估价。",
+        "考古学": "古代文明与发掘知识。可用于鉴定古物、解读遗迹。",
+        "艺术与手艺": "绘画、雕塑、写作等创作。需指定专长（如绘画、音乐）。",
+        "魅力": "第一印象与吸引他人。用于社交场合的初次接触。",
+        "攀爬": "攀岩、绳索与高处移动。失败可能坠落受伤。",
+        "计算机使用": "操作电脑、编程与网络安全。时代技能。",
+        "信用评级": "财富与社会地位。决定可调用的资源与生活水平。",
+        "克苏鲁神话": "接触禁忌知识后获得。用于识别神话生物与咒文，会损 SAN。",
+        "乔装": "改变外貌或身份以伪装。可用于潜入或欺骗。",
+        "汽车驾驶": "驾驶汽车。可扩展为飞行、船舶等。",
+        "电气维修": "修理电器、接线与简单电子设备。",
+        "电子学": "电子电路与设备。可用于窃听、爆破等。",
+        "急救": "现场止血、包扎与稳定伤势。不能治疗疾病或重伤。",
+        "历史": "历史事件与年代知识。可用于考证与识破谎言。",
+        "恐吓": "通过威胁迫使他人服从。可能招致敌意。",
+        "跳跃": "跳远、跳高与落地。与体质等结合判定伤害。",
+        "法律": "法律程序与条文。可用于辩护、合同或调查。",
+        "图书馆使用": "在图书馆或档案中查找资料。需花费时间。",
+        "聆听": "注意并分辨声音。用于窃听、察觉潜行等。",
+        "锁匠": "开锁与简单机关。可用于潜入或取证。",
+        "机械维修": "修理机械、引擎与机械装置。",
+        "医学": "诊断与治疗疾病、重伤。需设备与时间。",
+        "博物学": "动植物与自然现象。可用于识别物种、追踪。",
+        "导航": "使用地图、罗盘与星象定位。陆海空均可。",
+        "神秘学": "神秘学、符号与秘教知识。不包含克苏鲁神话。",
+        "重型机械操作": "操作挖掘机、起重机等。时代/职业相关。",
+        "其他语言": "非母语的语言能力。需指定语种，基础值多为 01。",
+        "母语": "母语（通常为 EDU×5）。用于读写与文学检定。",
+        "说服": "通过说理让他人接受观点。与话术、恐吓不同。",
+        "药学": "药物成分与配制。可用于识别毒药或制作药剂。",
+        "摄影": "拍照与暗房技术。可用于取证或艺术。",
+        "心理学": "察言观色、判断对方是否说谎或情绪状态。",
+        "精神分析": "专业心理治疗。可恢复因神话冲击失去的 SAN，需多疗程。",
+        "骑乘": "骑马或其它坐骑。用于驾驭与骑乘中的行动。",
+        "科学": "科学方法与某一学科。需指定学科（如化学、生物学）。",
+        "侦查": "主动观察环境、搜寻线索。调查核心技能之一。",
+        "潜行": "悄声移动、隐藏身形。与聆听等对抗。",
+        "游泳": "水中移动与自救。失败可能溺水。",
+        "话术": "欺骗、话里有话与快速应变。与说服不同，偏误导。",
+        "投掷": "投掷物品命中目标。可用于武器或杂物。",
+        "追踪": "根据足迹与痕迹追踪目标。需在户外或留痕环境。",
+        "斗殴": "徒手或近战武器（棍棒、刀等）战斗。",
+        "闪避": "躲开攻击。基础值为 DEX 的一半。",
+        "手枪": "手枪类枪械的命中与使用。",
+        "步枪/霰弹枪": "长枪与霰弹枪的命中与使用。",
+        "弓箭": "弓、弩等投射武器的使用。",
+        "鞭子": "鞭类武器的使用。",
+      };
+
+      /** CoC 7th 规则书：派生属性（HP/SAN/MP/DB/MOV）简短说明（悬停浮窗用） */
+      const DERIVED_STAT_DESCRIPTIONS = {
+        hp: { title: "HP 生命值", body: "由 (CON + SIZ) ÷ 10 向下取整得出。代表调查员能承受的肉体伤害，归零即死亡。" },
+        san: { title: "SAN 理智值", body: "初始等于意志(POW)。遭遇恐怖、神话真相或失败理智检定时会扣除；归零则陷入永久疯狂。可通过精神分析等恢复。" },
+        mp: { title: "MP 魔法值", body: "初始等于意志(POW)。施放咒文、使用某些异能时消耗；休息可恢复。归零时无法施法。" },
+        "db-build": { title: "DB / BUILD 伤害加值 / 体格", body: "由 STR + SIZ 查表得出。DB 为近战与部分远程的伤害加值（如 +1D4）；体格(Build) 影响擒抱等对抗。" },
+        mov: { title: "MOV 移动力", body: "由 STR、DEX、SIZ 中特定值及年龄修正得出。表示每轮可移动的码数（或米），用于追逐与战场移动。" },
+      };
 
       // --- 职业数据库与职业点逻辑：来自 职业录入.txt ---
       const OccupationDatabase = {
@@ -1800,7 +1906,79 @@
 
         const skillsContainer = document.getElementById("skills-container");
         if (skillsContainer) skillsContainer.addEventListener("input", () => updateAllSkillDisplays());
+
+        initCocRuleTooltip();
       });
+
+      /** 悬停属性/技能时显示 CoC 7th 规则说明浮窗 */
+      function initCocRuleTooltip() {
+        const view = document.getElementById("view-investigator");
+        const tip = document.getElementById("coc-rule-tooltip");
+        if (!view || !tip) return;
+
+        function showTip(title, body) {
+          tip.innerHTML = body
+            ? `<div class="coc-rule-tooltip-title">${title}</div><div class="coc-rule-tooltip-body">${body}</div>`
+            : `<div class="coc-rule-tooltip-body">${title}</div>`;
+          tip.classList.add("visible");
+          tip.setAttribute("aria-hidden", "false");
+        }
+
+        function hideTip() {
+          tip.classList.remove("visible");
+          tip.setAttribute("aria-hidden", "true");
+        }
+
+        function positionTip(rect) {
+          const gap = 8;
+          const viewRect = view.getBoundingClientRect();
+          let left = rect.left + rect.width / 2 - tip.offsetWidth / 2;
+          let top = rect.bottom + gap;
+          if (left < viewRect.left + 10) left = viewRect.left + 10;
+          if (left + tip.offsetWidth > viewRect.right - 10) left = viewRect.right - tip.offsetWidth - 10;
+          if (top + tip.offsetHeight > window.innerHeight - 12) top = rect.top - tip.offsetHeight - gap;
+          if (top < 12) top = rect.bottom + gap;
+          tip.style.left = `${left}px`;
+          tip.style.top = `${top}px`;
+        }
+
+        view.addEventListener("mouseover", (e) => {
+          const attrCard = e.target.closest("[data-attr-key]");
+          const skillRow = e.target.closest("[data-skill-row]");
+          const derivedBlock = e.target.closest("[data-coc-tooltip-type=\"derived\"]");
+          if (attrCard) {
+            const key = attrCard.dataset.attrKey;
+            const attr = ATTR_CONFIG.find((a) => a.key === key);
+            if (attr) {
+              showTip(attr.label + "（" + (attr.formula || "") + "）", attr.note || "");
+              requestAnimationFrame(() => positionTip(attrCard.getBoundingClientRect()));
+            }
+          } else if (skillRow) {
+            const name = skillRow.dataset.skillName || skillRow.dataset.skillRow;
+            const desc = name && SKILL_DESCRIPTIONS[name];
+            if (desc) {
+              showTip(name, desc);
+              requestAnimationFrame(() => positionTip(skillRow.getBoundingClientRect()));
+            }
+          } else if (derivedBlock) {
+            const id = derivedBlock.dataset.cocTooltipId;
+            const info = id && DERIVED_STAT_DESCRIPTIONS[id];
+            if (info) {
+              showTip(info.title, info.body);
+              requestAnimationFrame(() => positionTip(derivedBlock.getBoundingClientRect()));
+            }
+          }
+        });
+
+        view.addEventListener("mouseout", (e) => {
+          const stillOver = e.relatedTarget && (
+            e.relatedTarget.closest("[data-attr-key]") ||
+            e.relatedTarget.closest("[data-skill-row]") ||
+            e.relatedTarget.closest("[data-coc-tooltip-type=\"derived\"]")
+          );
+          if (!stillOver) hideTip();
+        });
+      }
     </script>
 
     <!-- Vue 响应式联动层：用 COCCalculator 与 OccupationDatabase 驱动联动 -->
